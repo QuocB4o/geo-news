@@ -54,13 +54,13 @@ flowchart LR
 ```text
 geo-news/
 ├── docs/               # project documentation (see below)
-├── Backend             # placeholder (empty file, not yet a directory)
-├── Database            # placeholder (empty file)
-├── Frontend            # placeholder (empty file)
-└── ExternalServices    # placeholder (empty file)
+├── Backend/            # product API (empty for now)
+├── Database/           # schema and migrations (empty for now)
+├── Frontend/           # web client (empty for now)
+└── ExternalServices/   # geocoder / model adapters (empty for now)
 ```
 
-The four placeholders are empty files; the intended layout is proposed in [technical design](docs/05-technical-design.md#1-source-layout-proposed).
+The four directories hold only a `.gitkeep`; the proposed full layout (including the Python pipeline) is in [technical design](docs/05-technical-design.md#1-source-layout-proposed).
 
 ## Prerequisites
 

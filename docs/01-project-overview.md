@@ -64,7 +64,7 @@ Team skills (from the feasibility study): Java and Python, DSA, OOP, databases, 
 
 ## Current State and Limitations
 
-- No implementation exists; the four top-level entries `Backend`, `Database`, `Frontend`, `ExternalServices` are **empty files, not directories**. They are untracked placeholders and are presumably meant to be directories (`TBD`).
+- No implementation exists; the four top-level entries `Backend`, `Database`, `Frontend`, `ExternalServices` are empty directories (each holds only a `.gitkeep`). The Python pipeline has no directory yet (`TBD`).
 - Technology choices remain open: backend (Java *or* FastAPI), frontend (React *or* Vue), map (Leaflet *or* Mapbox), vector store, geocoder, NER and summarization models.
 - No CI/CD, containerization, environment config, test suite or security design yet.
 - Inherent technical risks (see [04](04-system-architecture.md) and [05](05-technical-design.md)): false cluster merges/splits, wrong location extraction, summary hallucination, API rate limits, source-set bias.

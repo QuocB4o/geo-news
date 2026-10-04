@@ -4,7 +4,7 @@ Design of the processing pipeline and algorithms (from the TRD and feasibility s
 
 ## 1. Source Layout (proposed)
 
-The repo currently holds empty placeholder files `Backend`, `Database`, `Frontend`, `ExternalServices`. Proposed structure (`TBD` – confirm):
+The repo currently holds empty directories `Backend/`, `Database/`, `Frontend/`, `ExternalServices/`. Proposed structure (`TBD` – confirm):
 
 ```text
 geo-news/
@@ -85,4 +85,4 @@ From the feasibility study: layered architecture (controller → service → rep
 
 ## 9. Technical Debt (current)
 
-No code exists; the debt is documentation-level: unresolved stack choices ([04](04-system-architecture.md#open-decisions)), no labeled dataset, empty placeholder files at root.
+No code exists; the debt is documentation-level: unresolved stack choices ([04](04-system-architecture.md#open-decisions)), no labeled dataset, empty top-level directories.
