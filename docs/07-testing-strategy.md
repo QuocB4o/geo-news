@@ -1,6 +1,6 @@
 # 07 – Testing Strategy
 
-> No tests exist yet. Frameworks are `TBD` until stack decisions are made ([04](04-system-architecture.md#open-decisions)).
+> No tests exist yet. Tooling follows the stack in [04](04-system-architecture.md#technology-decisions).
 
 ## 1. Principles
 
@@ -12,13 +12,17 @@
 
 | Level | Scope | Owner (per PRD) | Tooling |
 | :--- | :--- | :--- | :--- |
-| Unit | Normalization, fingerprinting, similarity scoring, services | Each member | `TBD` (stack-dependent) |
-| Integration | API ↔ DB, pipeline ↔ DB, auth + bookmarks flow | Member 1 | `TBD` |
-| End-to-end | Feed → event page → bookmark in browser | Member 3 | `TBD` |
-| Pipeline evaluation | Clustering precision/recall on labeled data | Member 2 | `TBD` |
+| Unit | Normalization, fingerprinting, similarity scoring, services | Each member | `pytest`; Vitest (frontend) |
+| Integration | API ↔ DB, pipeline ↔ DB, auth + bookmarks flow | Member 1 | `pytest` + test PostgreSQL (Docker) |
+| End-to-end | Feed → event page → bookmark in browser | Member 3 | Playwright |
+| Pipeline evaluation | Clustering precision/recall on labeled data | Member 2 | `pytest` + evaluation scripts |
 | Security | Auth, input validation, secret handling | Member 1 | `TBD` |
 
-## 3. Clustering and NLP Evaluation
+## 3. Model Spike (Phase 2)
+
+Before locking in NER, embedding and geocoder choices, run a short spike on ~100 Vietnamese articles: compare candidate NER models and embedding models, and measure Nominatim resolution rate for extracted places. Replace the model names in [04](04-system-architecture.md#technology-decisions) with the measured winners.
+
+## 4. Clustering and NLP Evaluation
 
 1. Build a **small manually labeled dataset** of articles grouped into true events (size and sources `TBD`; label guidelines to be written).
 2. Include hard cases: two distinct events in the same city on the same day; one evolving event over several days; ambiguous place names; articles with no location.
@@ -26,7 +30,7 @@
 4. Tune weights/threshold on a training split; report on a held-out split to avoid overfitting.
 5. Re-run evaluation on every change to scoring, models or thresholds.
 
-## 4. Requirement Coverage
+## 5. Requirement Coverage
 
 | Requirement | Verified by |
 | :--- | :--- |
@@ -39,10 +43,10 @@
 | FR-AUTH-1, FR-BKM-1 | Integration tests incl. unauthorized access |
 | FR-MAP-1 | E2E: unknown-location events absent from map |
 
-## 5. Test Data
+## 6. Test Data
 
 Fixture articles (anonymized/short excerpts, mindful of source terms of use, `TBD`), recorded feed responses, mocked geocoder responses. No real secrets or personal data.
 
-## 6. CI
+## 7. CI
 
-No CI exists. Proposed minimum: run lint + unit + integration tests on every pull request (platform `TBD`). Coverage targets: `TBD`.
+No CI exists. Proposed minimum: GitHub Actions running `ruff`, unit and integration tests on every pull request. Coverage targets: `TBD`.

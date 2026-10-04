@@ -1,6 +1,6 @@
 # 06 – Database and API Design
 
-> **Proposal only.** No schema or API exists in the repository. This is a design derived from the PRD/TRD features. Engine, naming and auth are `TBD – Requires project/team decision`.
+> **Proposal only.** No schema or API exists in the repository. This is a design derived from the PRD/TRD features. Engine is PostgreSQL 16 + pgvector; migrations via Alembic. Remaining details are `TBD`.
 
 ## 1. Data Model
 
@@ -30,14 +30,14 @@ erDiagram
 | Uniqueness | `article.url` (normalized) and `article.fingerprint` unique/indexed to block duplicates |
 | Location | `event.location_status` ∈ `resolved` / `unknown`; unknown events have null coordinates |
 | Provenance | `article.event_id` preserves every contributing article and source |
-| Embeddings | Stored in vector store or DB extension (`TBD`); keyed by article id and model name |
-| Indexes | `article(published_at)`, `article(event_id)`, `event(last_updated_at)`, `event(topic)`, geo index on place (`TBD`) |
+| Embeddings | Stored in a pgvector column; keyed by article id and model name |
+| Indexes | `article(published_at)`, `article(event_id)`, `event(last_updated_at)`, `event(topic)`, index on place coordinates (PostGIS optional, `TBD`) |
 | Bookmark | Composite PK `(user_id, event_id)` |
-| Passwords | Hashed only; algorithm `TBD` |
+| Passwords | Hashed only (argon2 or bcrypt) |
 
 ## 2. API (proposed REST/JSON)
 
-Base path `/api/v1` (`TBD`). Auth: bearer token or session (`TBD`).
+Base path `/api/v1` (`TBD`). Auth: JWT bearer token.
 
 | Method | Path | Auth | Purpose |
 | :--- | :--- | :--- | :--- |
@@ -48,7 +48,6 @@ Base path `/api/v1` (`TBD`). Auth: bearer token or session (`TBD`).
 | GET | `/sources` | no | Sources included in the system |
 | POST | `/auth/register` | no | Create account |
 | POST | `/auth/login` | no | Authenticate |
-| POST | `/auth/logout` | yes | End session (if session-based) |
 | GET | `/bookmarks` | yes | List own bookmarks |
 | PUT | `/bookmarks/{eventId}` | yes | Bookmark an event (idempotent) |
 | DELETE | `/bookmarks/{eventId}` | yes | Remove bookmark |

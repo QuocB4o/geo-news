@@ -24,18 +24,18 @@ Research question: *How can a news system reduce information overload by groupin
 
 ## Technology Stack
 
-Choices marked "or" are undecided (see [architecture](docs/04-system-architecture.md#open-decisions)).
+Decisions and rationale: [architecture](docs/04-system-architecture.md#technology-decisions). Model and geocoder choices are provisional until validated on Vietnamese data.
 
 | Area | Planned |
 | :--- | :--- |
-| Frontend | React or Vue; Leaflet or Mapbox |
-| Backend | Java or FastAPI |
-| Data pipeline | Python (NER, sentence-transformer embeddings, clustering) |
-| Database | Relational DB (`TBD`) plus vector store (`TBD`) |
-| Infrastructure | `TBD` |
-| DevOps | `TBD` (no Docker/CI yet) |
-| Testing | `TBD`; clustering evaluated by precision/recall on labeled data |
-| External services | Geocoding API, embedding model, summarization model (all `TBD`) |
+| Frontend | React + TypeScript (Vite); Leaflet + OpenStreetMap |
+| Backend | Python 3.12, FastAPI, SQLAlchemy, Alembic |
+| Data pipeline | Python: Hugging Face NER, `sentence-transformers`, clustering, APScheduler |
+| Database | PostgreSQL 16 with pgvector |
+| Infrastructure | Docker Compose; hosting provider `TBD` |
+| DevOps | GitHub Actions (planned; not yet configured) |
+| Testing | pytest, Vitest, Playwright; clustering evaluated by precision/recall on labeled data |
+| External services | Nominatim (geocoding), Claude API (optional summaries) |
 
 ## Project Architecture
 
@@ -64,7 +64,7 @@ The four directories hold only a `.gitkeep`; the proposed full layout (including
 
 ## Prerequisites
 
-`TBD` – depends on stack decisions. Expected: Git, Python 3, a Node.js toolchain, a JDK if Java is chosen, and a database server.
+Git, Python 3.12+, Node.js 20+ (LTS), Docker with Compose, PostgreSQL 16 with pgvector (via Docker). Versions are targets; confirm when code is added.
 
 ## Installation
 
@@ -78,7 +78,8 @@ Planned variables (proposals; never commit real values):
 DATABASE_URL=
 SECRET_KEY=
 API_BASE_URL=
-GEOCODER_API_KEY=
+GEOCODER_USER_AGENT=
+ANTHROPIC_API_KEY=
 ```
 
 Full list in the [deployment guide](docs/08-deployment-guide.md#3-configuration).

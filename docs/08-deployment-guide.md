@@ -1,22 +1,21 @@
 # 08 – Deployment Guide
 
-> **Nothing is deployable yet.** The repository has no Dockerfile, compose file, CI/CD config or environment files. This guide records the planned deployment shape and what must be decided. Concrete commands will be added once the stack is chosen.
+> **Nothing is deployable yet.** The repository has no Dockerfile, compose file, CI/CD config or environment files. This guide records the planned deployment shape and what is still open. Concrete commands will be added with the first implementation.
 
 ## 1. Planned Runtime Components
 
 | Component | Runs as | Notes |
 | :--- | :--- | :--- |
-| Frontend | Static build served by web server/CDN | Framework `TBD` |
-| Backend API | Long-running service | Java or FastAPI (`TBD`) |
-| Pipeline | Scheduled job(s) / worker | Python; poll + cluster + re-merge schedule `TBD` |
-| Relational DB | Managed or containerized | Engine `TBD` |
-| Vector store | Managed or containerized / DB extension | `TBD` |
+| Frontend | Static build (Vite) served by a web server | React |
+| Backend API | Long-running service (container) | FastAPI via Uvicorn |
+| Pipeline | Worker container | Python + APScheduler; schedule values `TBD` |
+| PostgreSQL + pgvector | Container (or managed Postgres with pgvector) | Single database for relational data and vectors |
 
 ## 2. Environments
 
 | Environment | Purpose | Status |
 | :--- | :--- | :--- |
-| Local | Development | `TBD` (compose-based setup proposed) |
+| Local | Development | Docker Compose (to be added) |
 | Staging | Pre-release checks | `TBD` |
 | Production | Demo/live | `TBD` |
 
@@ -29,17 +28,15 @@ All configuration through environment variables; real values never committed. Pl
 | Variable | Used by | Purpose |
 | :--- | :--- | :--- |
 | `DATABASE_URL` | Backend, Pipeline | Relational DB connection |
-| `VECTOR_STORE_URL` | Pipeline, Backend | Vector store (if separate) |
 | `SECRET_KEY` | Backend | Signing/session secret |
 | `API_BASE_URL` | Frontend | Backend base URL |
-| `GEOCODER_API_KEY` | Pipeline | Geocoding provider key |
+| `GEOCODER_USER_AGENT` | Pipeline | Identifying User-Agent required by Nominatim usage policy |
 | `FEED_URLS` / feed config | Pipeline | Source list (format `TBD`) |
-| `SUMMARIZER_API_KEY` | Pipeline | Only if a hosted summarization model is used |
-| `MAPBOX_TOKEN` | Frontend | Only if Mapbox is chosen |
+| `ANTHROPIC_API_KEY` | Pipeline | Claude API for optional summaries |
 
 ## 4. Deployment Procedure (to be completed)
 
-1. Provision DB (and vector store). Apply migrations: `TBD`.
+1. Start PostgreSQL with pgvector. Apply Alembic migrations.
 2. Build and deploy Backend with env config.
 3. Deploy Pipeline workers and schedule jobs.
 4. Build Frontend with `API_BASE_URL`; publish.
@@ -47,7 +44,7 @@ All configuration through environment variables; real values never committed. Pl
 
 ## 5. CI/CD
 
-None. Proposed: build + test on pull request; deploy on merge to `main` after approval. Platform `TBD`.
+None yet. Planned: GitHub Actions to build and test on pull request; deploy on merge to `main` after approval.
 
 ## 6. Operations
 

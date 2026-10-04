@@ -1,15 +1,15 @@
 # 05 – Technical Design
 
-Design of the processing pipeline and algorithms (from the TRD and feasibility study). Library and framework choices are `TBD`.
+Design of the processing pipeline and algorithms (from the TRD and feasibility study). Stack choices are in [04](04-system-architecture.md#technology-decisions).
 
 ## 1. Source Layout (proposed)
 
-The repo currently holds empty directories `Backend/`, `Database/`, `Frontend/`, `ExternalServices/`. Proposed structure (`TBD` – confirm):
+The repo currently holds empty directories `Backend/`, `Database/`, `Frontend/`, `ExternalServices/`. Proposed structure:
 
 ```text
 geo-news/
-├── Backend/            # product API: auth, bookmarks, event queries
-├── Pipeline/           # Python ingestion, NLP, clustering, evaluation (name TBD)
+├── Backend/            # FastAPI: auth, bookmarks, event queries
+├── Pipeline/           # Python ingestion, NLP, clustering, evaluation (to be created)
 ├── Frontend/           # web client
 ├── Database/           # migrations, seed data
 ├── ExternalServices/   # adapters/config for geocoder, models (TBD)
@@ -24,7 +24,7 @@ geo-news/
 | 2 | Normalize | raw → Article | Clean title/body, language, publish time, source |
 | 3 | Dedup | Article → fingerprint match? | Hash/fingerprint for exact and near-exact |
 | 4 | Extract | Article → entities, place + confidence | NER; geocoder validation; cached |
-| 5 | Embed | Article → vector | Sentence transformer; cached |
+| 5 | Embed | Article → vector | `sentence-transformers` multilingual; cached |
 | 6 | Cluster | Article + candidates → Event | Incremental threshold, or DBSCAN/Agglomerative |
 | 7 | Re-merge | recent Events → merged Events | Periodic batch to fix false splits |
 | 8 | Summarize *(secondary)* | Event articles → summary + links | Grounded only |
@@ -46,7 +46,7 @@ final_similarity = 0.55 * semantic_score
 - `time_proximity`: decays with time gap between article and event.
 - Assignment: attach an article to the best-scoring recent event if `final_similarity ≥ threshold`, otherwise start a new event.
 - Weights and threshold are **starting values**, tuned against a labeled dataset by precision/recall, not asserted as correct.
-- Candidate retrieval (nearest neighbours restricted to a recent time window) keeps comparison cost bounded. Index choice `TBD`.
+- Candidate retrieval (nearest neighbours restricted to a recent time window) keeps comparison cost bounded. Use pgvector's index (HNSW or IVFFlat) with a time-window filter.
 
 ## 4. Location Handling
 
@@ -85,4 +85,4 @@ From the feasibility study: layered architecture (controller → service → rep
 
 ## 9. Technical Debt (current)
 
-No code exists; the debt is documentation-level: unresolved stack choices ([04](04-system-architecture.md#open-decisions)), no labeled dataset, empty top-level directories.
+No code exists; the debt is documentation-level: provisional model/geocoder choices ([04](04-system-architecture.md#technology-decisions)), no labeled dataset, empty top-level directories.

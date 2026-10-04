@@ -56,7 +56,7 @@ Source documents give no numeric targets. Values below are `TBD` and must be set
 | NFR-QUAL-3 | Grounding | Summaries contain no claims unsupported by the source articles |
 | NFR-PERF-1 | Performance | Fingerprint prefilter precedes semantic comparison; embeddings and geocoding results are cached |
 | NFR-PERF-2 | Latency / throughput | `TBD` |
-| NFR-SEC-1 | Security | Authenticated bookmarks; passwords stored hashed; secrets only via environment. Mechanisms `TBD` |
+| NFR-SEC-1 | Security | Authenticated bookmarks (JWT); passwords stored hashed (argon2/bcrypt); secrets only via environment |
 | NFR-COST-1 | Cost | Stay within external API rate limits by caching and a controlled feed set |
 | NFR-MAINT-1 | Maintainability | Layered architecture, clear domain models, interfaces, tests (from feasibility study) |
 | NFR-AVAIL-1 | Availability | `TBD` (student project; likely best-effort) |
