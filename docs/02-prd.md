@@ -1,4 +1,4 @@
-# Product Requirements Document (PRD)
+# 02 – Product Requirements Document (PRD)
 ## Geo News / Location-Aware Event Explorer
 
 **Concept:** A Southeast Asia-focused news aggregator that reduces information overload by clustering duplicate articles into distinct, location-based "events" featuring timelines and maps.
@@ -57,3 +57,6 @@
 | Wrong location shown to users | Allow an "unknown" state rather than forcing ambiguous articles onto the map. |
 | AI hallucination in summaries | Summaries grounded only in clustered articles, with direct links to sources. |
 | Scope creep | Limited sources/topics; map and AI summary deferred until core is proven. |
+
+---
+Technical details: [04-system-architecture.md](04-system-architecture.md), [05-technical-design.md](05-technical-design.md). Requirements: [03-srs.md](03-srs.md).
