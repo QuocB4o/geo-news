@@ -2,7 +2,7 @@
 
 A Southeast Asia-focused news aggregator that groups duplicate coverage into location-aware **events**, with timelines, maps and full source provenance.
 
-> **Status:** Planning stage. The repository contains documentation only. Sections below marked `TBD` depend on technology decisions not yet made.
+> **Status:** Planning stage. The repository contains documentation only. The technology stack is decided and the work is [split across the three members](split/README.md); sections below marked `TBD` will be filled in with the first implementation.
 
 ## Project Overview
 
@@ -54,13 +54,14 @@ flowchart LR
 ```text
 geo-news/
 ├── docs/               # project documentation (see below)
+├── split/              # work split: team plan and per-member task lists
 ├── Backend/            # product API (empty for now)
 ├── Database/           # schema and migrations (empty for now)
 ├── Frontend/           # web client (empty for now)
 └── ExternalServices/   # geocoder / model adapters (empty for now)
 ```
 
-The four directories hold only a `.gitkeep`; the proposed full layout (including the Python pipeline) is in [technical design](docs/05-technical-design.md#1-source-layout-proposed).
+The four code directories hold only a `.gitkeep`; the proposed full layout (including the Python pipeline) is in [technical design](docs/05-technical-design.md#1-source-layout-proposed).
 
 ## Prerequisites
 
@@ -99,13 +100,17 @@ Full list in the [deployment guide](docs/08-deployment-guide.md#3-configuration)
 3. Semantic clustering and evaluation
 4. UI, timelines, map, grounded summaries
 
+Backend and frontend work runs alongside these pipeline phases. The map and the grounded summary are built only if clustering and location quality pass a gate at the end of phase 3. Milestones and the critical path are in the [work split](split/README.md#2-phases-and-milestones).
+
 ## Team
 
-| Member | Domain |
-| :--- | :--- |
-| Member 1 | Backend core (API, auth, bookmarks, data models) |
-| Member 2 | AI and data pipeline |
-| Member 3 | Frontend (UI/UX, map, timeline, search) |
+| Member | Domain | Tasks |
+| :--- | :--- | :--- |
+| Member 1 | Backend, database, infrastructure (API, auth, bookmarks, schema, CI, deployment) | [member-1-backend.md](split/member-1-backend.md) |
+| Member 2 | AI and data pipeline (ingestion, location, embeddings, clustering, evaluation) | [member-2-pipeline.md](split/member-2-pipeline.md) |
+| Member 3 | Frontend and UX (feed, event page, search, map, end-to-end tests) | [member-3-frontend.md](split/member-3-frontend.md) |
+
+The split is a proposal for team review. Decisions still open, with an owner and deadline for each, are listed in the [work split](split/README.md#6-open-decisions).
 
 ## Documentation
 
@@ -119,5 +124,6 @@ Full list in the [deployment guide](docs/08-deployment-guide.md#3-configuration)
 | [06 Database & API Design](docs/06-database-api-design.md) | Proposed schema and endpoints |
 | [07 Testing Strategy](docs/07-testing-strategy.md) | Tests and evaluation |
 | [08 Deployment Guide](docs/08-deployment-guide.md) | Environments and configuration |
+| [Work Split](split/README.md) | Team plan, per-member tasks, requirement coverage, open decisions |
 
 `docs/v2.docx` is the original feasibility study.
