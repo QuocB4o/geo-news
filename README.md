@@ -2,26 +2,43 @@
 
 Geo News is a Vietnam-first news aggregator that groups duplicate coverage into location-aware events while preserving every contributing source.
 
-> **Status:** Documentation and implementation-planning stage. No application code, containers, migrations, CI, or tests exist yet.
+> **Status:** Planning stage. The repository contains documentation only; the technology stack is decided and the work is [split across the three team members](split/README.md). Sections marked `TBD` will be filled in with the first implementation.
 
-## Why Geo News?
+## Overview
 
-Traditional feeds often show many near-identical articles about one incident and classify geography by publisher rather than event location. Geo News instead presents one event with:
+Readers face information overload: many outlets publish near-identical reports of one incident, and country filters reflect where a publisher is based, not where the event happened. Geo News ingests allowlisted RSS feeds, detects duplicates, extracts the location each story is about, and clusters related articles into a single event.
 
-- A coverage timeline.
-- A resolved, unknown, or ambiguous event location.
-- Direct links to all contributing articles.
-- Explainable clustering based on semantic, entity, location, and time signals.
+Each event shows a coverage timeline, a location (or an explicit *unknown* rather than a wrong pin) and links to every contributing article. Clustering combines semantic similarity with entities, location and time, and records every score so decisions can be explained and corrected.
 
-The core research question is: *How can a news system reduce information overload by grouping duplicate coverage into location-aware events while preserving source provenance?*
+Research question: *How can a news system reduce information overload by grouping duplicate coverage into location-aware events while preserving source provenance?*
 
-## MVP Scope
+## Scope
 
-The core release includes allowlisted RSS ingestion, normalization, provenance-preserving duplicate detection, location extraction, explainable event clustering, a public event feed/detail experience, filters, and a reproducible evaluation.
+| Priority | What | Status |
+| :--- | :--- | :--- |
+| **P0** | Allowlisted RSS ingestion, normalization, provenance-preserving duplicate detection, primary-location extraction with an unknown state, explainable clustering, public event feed and detail page, timeline, filters, reproducible evaluation | Committed |
+| **P1** | Review queue and audited corrections (location, move, merge, split), starting after P0 is stable | Committed (one full correction path minimum) |
+| **P2** | Accounts and bookmarks, map view, grounded AI summaries, wider Southeast Asian coverage | Deferred; starts only after all P0/P1 gates pass |
 
-Reviewer corrections follow after the core workflow is stable. Accounts, bookmarks, map visualization, AI summaries, and multi-country coverage are deferred.
+Delivery is 12 weeks for a team of three. Details: [PRD](docs/PRD.md).
 
-## Planned Architecture
+## Technology Stack
+
+Working baseline from the [TRD](docs/TRD.md#2-technology-decisions). Model and geocoder choices stay provisional until validated on Vietnamese and English data.
+
+| Area | Decision |
+| :--- | :--- |
+| Web client | React + TypeScript + Vite |
+| Product API | Python 3.12, FastAPI, Pydantic |
+| Persistence | SQLAlchemy 2, Alembic |
+| Pipeline | Python worker with APScheduler (no message broker) |
+| Database | PostgreSQL 16 with pgvector |
+| NLP | Version-pinned multilingual NER and sentence-transformer models |
+| Geocoding | Cached, replaceable Nominatim-compatible adapter |
+| Map / summary | Leaflet + OpenStreetMap; configurable external model (both P2) |
+| Runtime and quality | Docker Compose; pytest, Ruff, Vitest, Playwright, GitHub Actions |
+
+## Architecture
 
 ```mermaid
 flowchart LR
@@ -33,51 +50,82 @@ flowchart LR
     Worker --> Services[Geocoder and Versioned Models]
 ```
 
-| Area | Working decision |
-| :--- | :--- |
-| Web | React + TypeScript + Vite |
-| API | Python 3.12 + FastAPI + Pydantic |
-| Pipeline | Python + APScheduler + versioned NLP/embedding models |
-| Database | PostgreSQL 16 + pgvector |
-| Persistence | SQLAlchemy 2 + Alembic |
-| Local runtime | Docker Compose |
-| Testing | pytest, Vitest, Playwright, labelled clustering/location evaluation |
+The web app never touches the database, feeds or models; the API serves queries and corrections; the worker does ingestion, enrichment and clustering. See [TRD §3](docs/TRD.md#3-system-context).
 
-Technology rationale and constraints are maintained in the TRD rather than duplicated here.
+## Repository Structure
+
+```text
+geo-news/
+├── docs/               # PRD, TRD, SPEC, Implementation Plan
+├── split/              # work split: team plan and per-member task lists
+├── Backend/            # placeholder (.gitkeep)
+├── Database/           # placeholder (.gitkeep)
+├── Frontend/           # placeholder (.gitkeep)
+└── ExternalServices/   # placeholder (.gitkeep)
+```
+
+The four placeholder directories are replaced by the layout proposed in [TRD §4](docs/TRD.md#4-proposed-repository-layout) (`apps/`, `workers/`, `packages/`, `db/`, `tests/`, `compose.yaml`) when the first vertical slice is scaffolded (task P1-02).
+
+## Prerequisites
+
+Git, Python 3.12+, Node.js 20+ (LTS), Docker with Compose. PostgreSQL 16 with pgvector runs in Docker. Versions are targets; confirm when code is added.
+
+## Installation
+
+`TBD` – no installable code exists yet. This section is completed with the first implementation.
+
+## Environment Configuration
+
+Planned variables from [TRD §11.3](docs/TRD.md#113-configuration-baseline). Never commit real values.
+
+```env
+DATABASE_URL=
+API_BASE_URL=
+APP_SECRET_KEY=
+GEOCODER_BASE_URL=
+GEOCODER_USER_AGENT=
+MODEL_CACHE_DIR=
+SUMMARY_API_KEY=        # optional, P2 only
+```
+
+Feed sources are validated database records, not environment variables.
+
+## Running and Testing
+
+`TBD` – no run or test commands yet. The test approach and CI gates are in [SPEC §7–9](docs/SPEC.md#7-verification-matrix); the target is a clean-environment start through documented Docker Compose commands.
+
+## Roadmap
+
+Five gated phases over 12 weeks ([Implementation Plan](docs/IMPLEMENTATION_PLAN.md#7-phase-plan)):
+
+| Weeks | Phase | Gate |
+| :--- | :--- | :--- |
+| 1–2 | Foundation and walking skeleton | G1: one fixture event visible in the browser |
+| 3–4 | Reliable ingestion and provenance | G2: idempotent, safe, inspectable |
+| 5–6 | Intelligence and evaluation baseline | G3: explainable events, reproducible report |
+| 7–8 | Reader MVP | G4: feed, detail, provenance, filters pass E2E |
+| 9–12 | Review, hardening and release | G5 (Week 10): correction path and scope freeze; G6 (Week 12): tagged release |
+
+## Team
+
+Roles come from the [Implementation Plan](docs/IMPLEMENTATION_PLAN.md#4-recommended-roles-for-three-people). Naming who takes which role is still open.
+
+| Member | Role | Focus |
+| :--- | :--- | :--- |
+| Member 1 | Platform and API Lead | FastAPI, schema and migrations, projections, corrections and audit, deployment |
+| Member 2 | Data Intelligence and Evaluation Lead | Ingestion, duplicates, location, embeddings, clustering, evaluation |
+| Member 3 | Product Experience and Quality Lead | React app, accessibility, CI and Compose, end-to-end tests, release |
+
+Task lists: [work split](split/README.md).
 
 ## Documentation
 
-The project uses three authoritative documents:
-
 | Document | Purpose |
 | :--- | :--- |
-| [Product Requirements Document](docs/PRD.md) | Why the product exists, users, scope, priorities, outcomes, and success measures |
-| [Technical Requirements Document](docs/TRD.md) | Architecture, technology, data model, processing, security, reliability, and deployment |
-| [Implementation Specification](docs/SPEC.md) | Canonical requirement IDs, acceptance criteria, behavior, verification, and work rules |
-| [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) | Delivery phases, team ownership, dependencies, gates, risks, and release approach |
+| [PRD](docs/PRD.md) | Product goals, success measures, scope (P0/P1/P2), user journeys, risks |
+| [TRD](docs/TRD.md) | Architecture, technology decisions, data model, pipeline, API baseline, security, deployment |
+| [SPEC](docs/SPEC.md) | Canonical requirements, acceptance criteria, evaluation specification, verification matrix |
+| [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) | Roles, phases, work packages, gates, risks, release checklist |
+| [Work split](split/README.md) | Assignment of the plan's work packages to the three members |
 
-Information flows from the PRD and TRD into the SPEC:
-
-```text
-PRD: product intent ─┐
-                    ├─> SPEC: implementable and verifiable requirements
-TRD: technical plan ┘
-```
-
-Each decision has one authoritative home: product scope in the PRD, technical choices in the TRD, and requirement/test traceability in the SPEC.
-
-## Repository State
-
-The repository currently contains planning documents and empty implementation placeholders. The proposed implementation layout is documented in [TRD §4](docs/TRD.md#4-proposed-repository-layout).
-
-Installation, runtime configuration, and test commands will be added when the first vertical slice is scaffolded. Until then, this README intentionally does not present placeholder commands as working instructions.
-
-## Delivery Sequence
-
-1. Freeze feeds, topics, languages, content-retention policy, and contracts.
-2. Build a fixture-driven ingestion-to-database slice.
-3. Add enrichment, location handling, clustering, and baseline evaluation.
-4. Deliver the event feed, detail page, provenance, and filters.
-5. Add review/correction, hardening, deployment, and final evaluation.
-
-No deferred feature may displace an unmet core requirement.
+The PRD sets intent and priority, the TRD the technical solution, and the SPEC what counts as done; the Implementation Plan covers delivery.
