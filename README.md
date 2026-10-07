@@ -54,6 +54,7 @@ The project uses three authoritative documents:
 | [Product Requirements Document](docs/PRD.md) | Why the product exists, users, scope, priorities, outcomes, and success measures |
 | [Technical Requirements Document](docs/TRD.md) | Architecture, technology, data model, processing, security, reliability, and deployment |
 | [Implementation Specification](docs/SPEC.md) | Canonical requirement IDs, acceptance criteria, behavior, verification, and work rules |
+| [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) | Delivery phases, team ownership, dependencies, gates, risks, and release approach |
 
 Information flows from the PRD and TRD into the SPEC:
 
