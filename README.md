@@ -1,77 +1,82 @@
-# geo-news
+# Geo News
 
-**Geo News / Location-Aware Event Explorer** — a Southeast Asia-focused news aggregator that reduces information overload by clustering duplicate articles into distinct, location-based "events" with timelines and maps.
+Geo News is a Vietnam-first news aggregator that groups duplicate coverage into location-aware events while preserving every contributing source.
 
-> **Research question:** How can a news system reduce information overload by grouping duplicate coverage into location-aware events while preserving source provenance?
+> **Status:** Documentation and implementation-planning stage. No application code, containers, migrations, CI, or tests exist yet.
 
-> **Status:** Planning stage. The repository currently contains requirements documents only; no code has been written yet.
+## Why Geo News?
 
-## Features
+Traditional feeds often show many near-identical articles about one incident and classify geography by publisher rather than event location. Geo News instead presents one event with:
 
-| Feature | Priority |
-| :--- | :--- |
-| Event feed (clustered events instead of raw articles) | Core |
-| Event page with coverage timeline and source articles | Core |
-| Source provenance list | Core |
-| Search and filters (topic, location, time) | Core |
-| Accounts and bookmarks | Core |
-| Map view (events with unknown location are not forced onto the map) | Secondary |
-| Grounded AI summary (built only from the event's own articles, with links) | Secondary |
+- A coverage timeline.
+- A resolved, unknown, or ambiguous event location.
+- Direct links to all contributing articles.
+- Explainable clustering based on semantic, entity, location, and time signals.
 
-Map and AI summarization are built only after location extraction and clustering are proven.
+The core research question is: *How can a news system reduce information overload by grouping duplicate coverage into location-aware events while preserving source provenance?*
 
-## Scope
+## MVP Scope
 
-- **Region:** Vietnam, or 4–5 Southeast Asian countries
-- **Sources:** 5–15 reliable RSS/news API feeds
-- **Topics:** 3–5 core topics (e.g. politics, weather, business)
+The core release includes allowlisted RSS ingestion, normalization, provenance-preserving duplicate detection, location extraction, explainable event clustering, a public event feed/detail experience, filters, and a reproducible evaluation.
 
-## How it works
+Reviewer corrections follow after the core workflow is stable. Accounts, bookmarks, map visualization, AI summaries, and multi-country coverage are deferred.
 
-1. **Ingest** RSS/news feeds and normalize them into a common article model.
-2. **Dedup** exact and near-exact duplicates with hashing/fingerprints.
-3. **Extract** locations and entities with NER, validate places via a geocoding API, and store confidence scores.
-4. **Embed** articles with sentence transformers.
-5. **Cluster** articles into events (incremental threshold clustering, or DBSCAN/Agglomerative).
-6. **Serve** events, timelines, provenance, and map data through the API.
-7. **Summarize** (secondary) using only text from the clustered articles.
+## Planned Architecture
 
-To avoid merging distinct events (e.g. two protests in the same city), clustering combines several signals rather than semantic distance alone:
-
-```
-final_similarity = 0.55 * semantic_score
-                 + 0.20 * entity_overlap
-                 + 0.15 * location_match
-                 + 0.10 * time_proximity
+```mermaid
+flowchart LR
+    User --> Web[React Web]
+    Web -->|REST/JSON| API[FastAPI Product API]
+    API --> DB[(PostgreSQL + pgvector)]
+    Feeds[Allowlisted RSS Feeds] --> Worker[Python Pipeline Worker]
+    Worker --> DB
+    Worker --> Services[Geocoder and Versioned Models]
 ```
 
-Weights and thresholds are tuned against a small, manually labeled dataset using precision/recall.
-
-## Planned architecture
-
-| Component | Stack | Responsibilities |
-| :--- | :--- | :--- |
-| Backend core | Java or FastAPI | Product API, authentication, bookmarks, endpoints |
-| AI and data pipeline | Python | Ingestion, NLP/NER, geocoding, embeddings, clustering, evaluation |
-| Frontend | React or Vue, Leaflet/Mapbox | Event pages, timeline, map, search and filters |
-| Storage | Relational DB plus vector store | Articles, events, users, embeddings |
-
-## Roadmap
-
-1. **Ingestion and infrastructure** — RSS poller, normalization, basic API, data models
-2. **NLP and geocoding** — duplicate hashing, location NER, cached geocoding
-3. **Semantic clustering** — embeddings, clustering, evaluation metrics
-4. **UI and contextualization** — event pages, timelines, provenance, map markers, grounded summaries
-
-## Team
-
-| Member | Domain |
+| Area | Working decision |
 | :--- | :--- |
-| Member 1 | Backend core (API, auth, bookmarks, data models) |
-| Member 2 | AI and data pipeline (ingestion, NLP, clustering, evaluation) |
-| Member 3 | Frontend (UI/UX, map, timeline, search and filters) |
+| Web | React + TypeScript + Vite |
+| API | Python 3.12 + FastAPI + Pydantic |
+| Pipeline | Python + APScheduler + versioned NLP/embedding models |
+| Database | PostgreSQL 16 + pgvector |
+| Persistence | SQLAlchemy 2 + Alembic |
+| Local runtime | Docker Compose |
+| Testing | pytest, Vitest, Playwright, labelled clustering/location evaluation |
+
+Technology rationale and constraints are maintained in the TRD rather than duplicated here.
 
 ## Documentation
 
-- [PRD](docs/PRD.md) — goals, scope, features, success criteria, timeline, product risks
-- [TRD](docs/TRD.md) — architecture, pipeline, algorithms, technical risks
+The project uses three authoritative documents:
+
+| Document | Purpose |
+| :--- | :--- |
+| [Product Requirements Document](docs/PRD.md) | Why the product exists, users, scope, priorities, outcomes, and success measures |
+| [Technical Requirements Document](docs/TRD.md) | Architecture, technology, data model, processing, security, reliability, and deployment |
+| [Implementation Specification](docs/SPEC.md) | Canonical requirement IDs, acceptance criteria, behavior, verification, and work rules |
+
+Information flows from the PRD and TRD into the SPEC:
+
+```text
+PRD: product intent ─┐
+                    ├─> SPEC: implementable and verifiable requirements
+TRD: technical plan ┘
+```
+
+Each decision has one authoritative home: product scope in the PRD, technical choices in the TRD, and requirement/test traceability in the SPEC.
+
+## Repository State
+
+The repository currently contains planning documents and empty implementation placeholders. The proposed implementation layout is documented in [TRD §4](docs/TRD.md#4-proposed-repository-layout).
+
+Installation, runtime configuration, and test commands will be added when the first vertical slice is scaffolded. Until then, this README intentionally does not present placeholder commands as working instructions.
+
+## Delivery Sequence
+
+1. Freeze feeds, topics, languages, content-retention policy, and contracts.
+2. Build a fixture-driven ingestion-to-database slice.
+3. Add enrichment, location handling, clustering, and baseline evaluation.
+4. Deliver the event feed, detail page, provenance, and filters.
+5. Add review/correction, hardening, deployment, and final evaluation.
+
+No deferred feature may displace an unmet core requirement.
