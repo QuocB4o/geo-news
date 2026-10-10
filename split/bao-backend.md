@@ -1,34 +1,34 @@
-# Member 1 – Platform and API (proposed Person A)
+# Bao – Platform and API (proposed Person A)
 
 Part of the [work split](README.md). Authority: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [SPEC](../docs/SPEC.md), [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md#41-person-a--platform-and-api-lead). Package IDs (`P#-##`) are the plan's.
 
 **You own:** the FastAPI application and its public/admin contracts, the PostgreSQL schema and Alembic migrations, event projections and transaction boundaries, operational endpoints, review/correction commands with audit, API security and performance, and deployment/recovery.
 
-**Your deliverables unblock both teammates:** the schema (P1-04) and the API scaffold and error envelope (P1-03) in Phase 1. The pipeline writes the tables you migrate, so every schema change needs Member 2's review before merge.
+**Your deliverables unblock both teammates:** the schema (P1-04) and the API scaffold and error envelope (P1-03) in Phase 1. The pipeline writes the tables you migrate, so every schema change needs Phat's review before merge.
 
-**Backup role:** you cover for Member 2 (pipeline).
+**Backup role:** you cover for Phat (pipeline).
 
 ## Tasks
 
 | ID | Task | Requirements | Gate | Size | Reviewer | Depends on | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| P1-03 | FastAPI scaffold: config, error envelope, correlation ID, health/version endpoints | NFR-07, NFR-09 | G1 | S | Member 2 | – | Not started |
-| P1-04 | PostgreSQL + pgvector, SQLAlchemy, Alembic, first migration | NFR-07, NFR-08 | G1 | M | Member 2 | – | Not started |
-| P2-01 | Source configuration and destination allowlist validation | FR-ING-01, NFR-04 | G2 | M | Member 2 | P1-04 | Not started |
-| P2-06a | Article/processing inspection endpoint *(API half of plan P2-06)* | FR-ING-05 | G2 | S | Member 3 | P1-04, P2-05 | Not started |
-| P3-08 | Transactional event assignment and projection refresh | FR-CLU-03, FR-CLU-05 | G3 | M | Member 2 | P1-04, P3-07 | Not started |
-| P4-01 | Cursor-paginated published-event endpoint | FR-EVT-01, NFR-03 | G4 | M | Member 3 | P3-08 | Not started |
-| P4-02 | Event detail, source timeline and included-source endpoints | FR-EVT-02, FR-EVT-05, FR-CLU-05 | G4 | S | Member 3 | P4-01 | Not started |
-| P4-03 | Topic, location, source, date and text filters | FR-EVT-03 | G4 | M | Member 3 | P4-01 | Not started |
-| P4-08 | Seeded API performance measurement | NFR-03 | G4 | S | Member 2 | P4-01 – P4-03, D-08 | Not started |
-| P5-01 | Review queue: failures, low-confidence locations, low-margin assignments, proposed merges | FR-ADM-01, FR-CLU-04 | G5 | M | Member 3 | P3-08, P4-04 | Not started |
-| P5-02a | One audited location or membership correction *(API half of plan P5-02)* | FR-ADM-02, FR-ADM-03 | G5 | M | Member 2 | P5-01, D-09 | Not started |
-| P5-03 | Remaining move / merge / split operations, capacity permitting | FR-ADM-02, FR-CLU-05 | G5 | M | Member 2 | P5-02a | Not started |
-| P5-04 | Failure injection, retry, concurrency and log verification | NFR-01, NFR-02, NFR-09 | G5 | M | Member 2 | P4 gate | Not started |
-| P5-05 | Security review: source fetching, rendering, inputs, authorization, secrets, errors | NFR-04 | G5 | M | Member 2 | P4 gate | Not started |
-| P5-08 | Deployment, backup/restore, rollback and clean-install rehearsal | NFR-08 | G6 | M | Member 3 | P5-04, D-06 | Not started |
+| P1-03 | FastAPI scaffold: config, error envelope, correlation ID, health/version endpoints | NFR-07, NFR-09 | G1 | S | Phat | – | Not started |
+| P1-04 | PostgreSQL + pgvector, SQLAlchemy, Alembic, first migration | NFR-07, NFR-08 | G1 | M | Phat | – | Not started |
+| P2-01 | Source configuration and destination allowlist validation | FR-ING-01, NFR-04 | G2 | M | Phat | P1-04 | Not started |
+| P2-06a | Article/processing inspection endpoint *(API half of plan P2-06)* | FR-ING-05 | G2 | S | Huy | P1-04, P2-05 | Not started |
+| P3-08 | Transactional event assignment and projection refresh | FR-CLU-03, FR-CLU-05 | G3 | M | Phat | P1-04, P3-07 | Not started |
+| P4-01 | Cursor-paginated published-event endpoint | FR-EVT-01, NFR-03 | G4 | M | Huy | P3-08 | Not started |
+| P4-02 | Event detail, source timeline and included-source endpoints | FR-EVT-02, FR-EVT-05, FR-CLU-05 | G4 | S | Huy | P4-01 | Not started |
+| P4-03 | Topic, location, source, date and text filters | FR-EVT-03 | G4 | M | Huy | P4-01 | Not started |
+| P4-08 | Seeded API performance measurement | NFR-03 | G4 | S | Phat | P4-01 – P4-03, D-08 | Not started |
+| P5-01 | Review queue: failures, low-confidence locations, low-margin assignments, proposed merges | FR-ADM-01, FR-CLU-04 | G5 | M | Huy | P3-08, P4-04 | Not started |
+| P5-02a | One audited location or membership correction *(API half of plan P5-02)* | FR-ADM-02, FR-ADM-03 | G5 | M | Phat | P5-01, D-09 | Not started |
+| P5-03 | Remaining move / merge / split operations, capacity permitting | FR-ADM-02, FR-CLU-05 | G5 | M | Phat | P5-02a | Not started |
+| P5-04 | Failure injection, retry, concurrency and log verification | NFR-01, NFR-02, NFR-09 | G5 | M | Phat | P4 gate | Not started |
+| P5-05 | Security review: source fetching, rendering, inputs, authorization, secrets, errors | NFR-04 | G5 | M | Phat | P4 gate | Not started |
+| P5-08 | Deployment, backup/restore, rollback and clean-install rehearsal | NFR-08 | G6 | M | Huy | P5-04, D-06 | Not started |
 
-Supporting (not owned): you implement the projection refresh used by P3-08 for the pipeline; P1-07 CI and Compose are Member 3's, and you review them.
+Supporting (not owned): you implement the projection refresh used by P3-08 for the pipeline; P1-07 CI and Compose are Huy's, and you review them.
 
 ## Acceptance Criteria
 
@@ -41,7 +41,7 @@ Supporting (not owned): you implement the projection refresh used by P3-08 for t
 - The first migration applies to an empty PostgreSQL 16 with pgvector enabled and creates enough of the [TRD §5](../docs/TRD.md#5-logical-data-model) entities (at least `source`, `article`, `article_processing`, `event`, `event_article_membership`) for the walking skeleton.
 - The partial unique constraint "one active membership per article" and the `(source_id, external_id)` uniqueness exist.
 - The embedding column dimension is a placeholder until P3-02 reports the model; a later migration sets it.
-- Member 2 has approved the migration.
+- Phat has approved the migration.
 
 **P2-01 – Source configuration and allowlist validation**
 - A valid enabled source is accepted; unsupported schemes, unapproved hosts and non-public destinations (loopback, private, link-local, multicast, metadata service; IPv4 and IPv6) are rejected, with a test matrix.
@@ -89,4 +89,4 @@ Supporting (not owned): you implement the projection refresh used by P3-08 for t
 **P5-08 – Deployment and recovery**
 - The system runs on the chosen demo host over HTTPS with restricted database access; backup, restore and rollback are rehearsed from written steps; a clean install passes.
 
-Shared: take part in labelling the evaluation dataset ([P3-01](member-2-pipeline.md)) in Phase 3.
+Shared: take part in labelling the evaluation dataset ([P3-01](phat-pipeline.md)) in Phase 3.

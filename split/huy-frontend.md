@@ -1,4 +1,4 @@
-# Member 3 – Product Experience and Quality (proposed Person C)
+# Huy – Product Experience and Quality (proposed Person C)
 
 Part of the [work split](README.md). Authority: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [SPEC](../docs/SPEC.md), [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md#43-person-c--product-experience-and-quality-lead). Package IDs (`P#-##`) are the plan's.
 
@@ -15,20 +15,20 @@ Part of the [work split](README.md). Authority: [PRD](../docs/PRD.md), [TRD](../
 | ID | Task | Requirements | Gate | Size | Reviewer | Depends on | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-01 | Facilitate decisions: feeds, topics, languages, retention, evaluation volume, hosting | PRD open decisions | G1 | S | Team | – | Not started |
-| P1-02 | Repository structure, contribution guide, environment example, conventions | NFR-07 | G1 | S | Member 1 | P1-01 | Not started |
-| P1-06 | React app: routing, API boundary, accessible shell | NFR-06, NFR-07 | G1 | M | Member 1 | P1-02 | Not started |
-| P1-07 | Docker Compose and CI: format, static analysis, tests, migration-from-empty, requirement-ID check | NFR-07, NFR-08 | G1 | M | Member 1 | P1-03 – P1-06 | Not started |
-| P2-06b | Article/processing inspection screen *(UI half of plan P2-06)* | FR-ING-05 | G2 | S | Member 1 | P2-06a | Not started |
-| P3-10 | Explainability display for internal inspection | enables FR-ADM-01 | G3 | S | Member 1 | P3-07, P3-08 | Not started |
-| P4-04 | Event feed, detail, timeline, provenance, filter controls and source disclosure UI | FR-EVT-01, FR-EVT-02, FR-EVT-03, FR-EVT-05 | G4 | L | Member 1 | P4-01 – P4-03 | Not started |
-| P4-05 | Unknown/ambiguous location and partial-data states | FR-EVT-04, NFR-05 | G4 | M | Member 1 | P4-04 | Not started |
-| P4-06 | Responsive and accessibility verification | NFR-06 | G4 | M | Member 1 | P4-04, P4-05 | Not started |
-| P4-07 | Reader-journey Playwright suite | NFR-08 | G4 | M | Member 1 | P4-04, P4-05 | Not started |
-| P5-02b | Correction UI for the one audited correction *(UI half of plan P5-02)* | FR-ADM-02, FR-ADM-03 | G5 | M | Member 1 | P5-01, P5-02a | Not started |
-| P5-06 | Accessibility and performance regression pass | NFR-03, NFR-06 | G5 | M | Member 1 | P4 gate | Not started |
+| P1-02 | Repository structure, contribution guide, environment example, conventions | NFR-07 | G1 | S | Bao | P1-01 | Not started |
+| P1-06 | React app: routing, API boundary, accessible shell | NFR-06, NFR-07 | G1 | M | Bao | P1-02 | Not started |
+| P1-07 | Docker Compose and CI: format, static analysis, tests, migration-from-empty, requirement-ID check | NFR-07, NFR-08 | G1 | M | Bao | P1-03 – P1-06 | Not started |
+| P2-06b | Article/processing inspection screen *(UI half of plan P2-06)* | FR-ING-05 | G2 | S | Bao | P2-06a | Not started |
+| P3-10 | Explainability display for internal inspection | enables FR-ADM-01 | G3 | S | Bao | P3-07, P3-08 | Not started |
+| P4-04 | Event feed, detail, timeline, provenance, filter controls and source disclosure UI | FR-EVT-01, FR-EVT-02, FR-EVT-03, FR-EVT-05 | G4 | L | Bao | P4-01 – P4-03 | Not started |
+| P4-05 | Unknown/ambiguous location and partial-data states | FR-EVT-04, NFR-05 | G4 | M | Bao | P4-04 | Not started |
+| P4-06 | Responsive and accessibility verification | NFR-06 | G4 | M | Bao | P4-04, P4-05 | Not started |
+| P4-07 | Reader-journey Playwright suite | NFR-08 | G4 | M | Bao | P4-04, P4-05 | Not started |
+| P5-02b | Correction UI for the one audited correction *(UI half of plan P5-02)* | FR-ADM-02, FR-ADM-03 | G5 | M | Bao | P5-01, P5-02a | Not started |
+| P5-06 | Accessibility and performance regression pass | NFR-03, NFR-06 | G5 | M | Bao | P4 gate | Not started |
 | P5-10 | Release candidate, tag, handoff documentation and presentation rehearsal | release success definition | G6 | M | Team | P5-07 – P5-09 | Not started |
 
-Supporting (not owned): labelling a share of the evaluation dataset ([P3-01](member-2-pipeline.md)); consulting on source licensing and retention (D-04).
+Supporting (not owned): labelling a share of the evaluation dataset ([P3-01](phat-pipeline.md)); consulting on source licensing and retention (D-04).
 
 ## Acceptance Criteria
 

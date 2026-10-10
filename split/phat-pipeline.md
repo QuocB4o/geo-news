@@ -1,4 +1,4 @@
-# Member 2 – Data Intelligence and Evaluation (proposed Person B)
+# Phat – Data Intelligence and Evaluation (proposed Person B)
 
 Part of the [work split](README.md). Authority: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [SPEC](../docs/SPEC.md), [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md#42-person-b--data-intelligence-and-evaluation-lead). Package IDs (`P#-##`) are the plan's.
 
@@ -6,31 +6,31 @@ Part of the [work split](README.md). Authority: [PRD](../docs/PRD.md), [TRD](../
 
 **You are the critical path and carry the most work.** The research question is answered by your evaluation numbers. Raise delays early; the [README](README.md#5-load) lists what moves to other members first.
 
-**Your schema reviews matter:** Member 1 writes migrations, but you approve every change that touches pipeline tables.
+**Your schema reviews matter:** Bao writes migrations, but you approve every change that touches pipeline tables.
 
-**Backup role:** you cover for Member 1 (platform and API).
+**Backup role:** you cover for Bao (platform and API).
 
 ## Tasks
 
 | ID | Task | Requirements | Gate | Size | Reviewer | Depends on | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| P1-05 | Pipeline worker scaffold: stage interface, configuration, structured job logging | NFR-01, NFR-02, NFR-09 | G1 | M | Member 1 | – | Not started |
-| P1-08 | Fixture feed and a temporary deterministic assignment that reaches one event card | FR-ING-01–05, FR-EVT-01–02 | G1 | M | Member 1 | P1-03 – P1-06 | Not started |
-| P2-02 | Feed polling with timeouts, redirect/content limits and feed-run records | FR-ING-01, FR-ING-05, NFR-01 | G2 | M | Member 1 | P2-01, D-01 | Not started |
-| P2-03 | Deterministic Unicode, text, time and language normalization | FR-ING-02 | G2 | S | Member 1 | P2-02, D-04 | Not started |
-| P2-04 | Source identity, normalized-URL identity and replay-safe insertion | FR-ING-03, NFR-02 | G2 | M | Member 1 | P2-03 | Not started |
-| P2-05 | Provenance preservation and error-state persistence | FR-ING-04, FR-ING-05 | G2 | S | Member 1 | P2-04 | Not started |
-| P2-07 | Integration tests: replay, malformed items, unsupported languages, outage, unsafe URLs | NFR-01, NFR-02, NFR-04 | G2 | M | Member 1 | P2-02 – P2-05 | Not started |
-| P3-01 | Labelling guide, dataset schema, disagreement/adjudication process | FR-EVA-01 | G3 | M | Member 3 | D-05 | Not started |
-| P3-02 | NER, embedding and geocoder spike on Vietnamese/English articles | FR-ENR-03–05, FR-EVA-02 | G3 | L | Member 1 | P2-03, D-03 | Not started |
-| P3-03 | Exact/near duplicate detection that preserves cross-source articles | FR-ENR-01, FR-ENR-02 | G3 | M | Member 1 | P2-05 | Not started |
-| P3-04 | Versioned entity/location extraction with resolved / unknown / ambiguous outcomes | FR-ENR-03, FR-EVT-04 | G3 | L | Member 1 | P3-02 | Not started |
-| P3-05 | Cached, replaceable geocoder adapter | FR-ENR-04, NFR-10 | G3 | M | Member 1 | P3-02 | Not started |
-| P3-06 | Versioned embedding generation and compatibility checks | FR-ENR-05 | G3 | M | Member 1 | P3-02 | Not started |
-| P3-07 | Bounded candidate retrieval and multi-signal scoring | FR-CLU-01, FR-CLU-02 | G3 | L | Member 1 | P3-04, P3-06 | Not started |
-| P3-09 | Reproducible evaluation command and baseline report | FR-EVA-02, FR-EVA-03 | G3 | M | Member 3 | P3-01, P3-07, P3-08 | Not started |
-| P5-07 | Final held-out evaluation and limitation report | FR-EVA-02, FR-EVA-03, NFR-05 | G6 | M | Member 3 | P5-04 | Not started |
-| P5-09 | Deterministic demo dataset, cached providers and recorded fallback | NFR-10 | G6 | M | Member 3 | P5-07 | Not started |
+| P1-05 | Pipeline worker scaffold: stage interface, configuration, structured job logging | NFR-01, NFR-02, NFR-09 | G1 | M | Bao | – | Not started |
+| P1-08 | Fixture feed and a temporary deterministic assignment that reaches one event card | FR-ING-01–05, FR-EVT-01–02 | G1 | M | Bao | P1-03 – P1-06 | Not started |
+| P2-02 | Feed polling with timeouts, redirect/content limits and feed-run records | FR-ING-01, FR-ING-05, NFR-01 | G2 | M | Bao | P2-01, D-01 | Not started |
+| P2-03 | Deterministic Unicode, text, time and language normalization | FR-ING-02 | G2 | S | Bao | P2-02, D-04 | Not started |
+| P2-04 | Source identity, normalized-URL identity and replay-safe insertion | FR-ING-03, NFR-02 | G2 | M | Bao | P2-03 | Not started |
+| P2-05 | Provenance preservation and error-state persistence | FR-ING-04, FR-ING-05 | G2 | S | Bao | P2-04 | Not started |
+| P2-07 | Integration tests: replay, malformed items, unsupported languages, outage, unsafe URLs | NFR-01, NFR-02, NFR-04 | G2 | M | Bao | P2-02 – P2-05 | Not started |
+| P3-01 | Labelling guide, dataset schema, disagreement/adjudication process | FR-EVA-01 | G3 | M | Huy | D-05 | Not started |
+| P3-02 | NER, embedding and geocoder spike on Vietnamese/English articles | FR-ENR-03–05, FR-EVA-02 | G3 | L | Bao | P2-03, D-03 | Not started |
+| P3-03 | Exact/near duplicate detection that preserves cross-source articles | FR-ENR-01, FR-ENR-02 | G3 | M | Bao | P2-05 | Not started |
+| P3-04 | Versioned entity/location extraction with resolved / unknown / ambiguous outcomes | FR-ENR-03, FR-EVT-04 | G3 | L | Bao | P3-02 | Not started |
+| P3-05 | Cached, replaceable geocoder adapter | FR-ENR-04, NFR-10 | G3 | M | Bao | P3-02 | Not started |
+| P3-06 | Versioned embedding generation and compatibility checks | FR-ENR-05 | G3 | M | Bao | P3-02 | Not started |
+| P3-07 | Bounded candidate retrieval and multi-signal scoring | FR-CLU-01, FR-CLU-02 | G3 | L | Bao | P3-04, P3-06 | Not started |
+| P3-09 | Reproducible evaluation command and baseline report | FR-EVA-02, FR-EVA-03 | G3 | M | Huy | P3-01, P3-07, P3-08 | Not started |
+| P5-07 | Final held-out evaluation and limitation report | FR-EVA-02, FR-EVA-03, NFR-05 | G6 | M | Huy | P5-04 | Not started |
+| P5-09 | Deterministic demo dataset, cached providers and recorded fallback | NFR-10 | G6 | M | Huy | P5-07 | Not started |
 
 Supporting (not owned): you reuse P2-01 for fetch validation, provide the two-source duplicate and same-city fixtures that API and web tests rely on, and supply the review-queue items for P5-01.
 
@@ -64,7 +64,7 @@ Supporting (not owned): you reuse P2-01 for fetch validation, provide the two-so
 - Labelling is shared by all three members; you set the guidelines and check consistency.
 
 **P3-02 – Model spike**
-- NER, embedding and geocoder options are compared on representative Vietnamese and English articles, kept separate from the held-out set; chosen models, versions and the embedding dimension are written down in a short ADR and handed to Member 1.
+- NER, embedding and geocoder options are compared on representative Vietnamese and English articles, kept separate from the held-out set; chosen models, versions and the embedding dimension are written down in a short ADR and handed to Bao.
 
 **P3-03 – Duplicate detection**
 - Checks run cheapest first: source ID, URL hash, title hash in a window, content fingerprint, then semantic comparison only if inconclusive.

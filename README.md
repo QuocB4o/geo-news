@@ -108,13 +108,13 @@ Five gated phases over 12 weeks ([Implementation Plan](docs/IMPLEMENTATION_PLAN.
 
 ## Team
 
-Roles come from the [Implementation Plan](docs/IMPLEMENTATION_PLAN.md#4-recommended-roles-for-three-people). Naming who takes which role is still open.
+Roles come from the [Implementation Plan](docs/IMPLEMENTATION_PLAN.md#4-recommended-roles-for-three-people). Bao, Phat and Huy take Person A, B and C respectively.
 
 | Member | Role | Focus |
 | :--- | :--- | :--- |
-| Member 1 | Platform and API Lead | FastAPI, schema and migrations, projections, corrections and audit, deployment |
-| Member 2 | Data Intelligence and Evaluation Lead | Ingestion, duplicates, location, embeddings, clustering, evaluation |
-| Member 3 | Product Experience and Quality Lead | React app, accessibility, CI and Compose, end-to-end tests, release |
+| Bao | Platform and API Lead | FastAPI, schema and migrations, projections, corrections and audit, deployment |
+| Phat | Data Intelligence and Evaluation Lead | Ingestion, duplicates, location, embeddings, clustering, evaluation |
+| Huy | Product Experience and Quality Lead | React app, accessibility, CI and Compose, end-to-end tests, release |
 
 Task lists: [work split](split/README.md).
 

@@ -2,24 +2,24 @@
 
 How the work in the [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md) is divided across the three team members. Requirements are not repeated here: every task links to [SPEC](../docs/SPEC.md) requirement IDs, and task IDs (`P1-01` … `P5-10`) are the plan's own work packages.
 
-> **Status:** proposal for team review. The plan's roles (Person A, B, C) are mapped to Members 1, 2, 3 below; naming who takes which role is still an open Week 1 decision (D-07). Sizes are rough (S ≈ a few days, M ≈ about a week, L ≈ about two weeks of one person's time), not commitments.
+> **Status:** proposal for team review. The plan's roles (Person A, B, C) are mapped to Bao, Phat, Huy below; Bao, Phat and Huy take these roles (decision D-07, role assignment). Sizes are rough (S ≈ a few days, M ≈ about a week, L ≈ about two weeks of one person's time), not commitments.
 
 | Member | Plan role | Task list |
 | :--- | :--- | :--- |
-| Member 1 | Person A – Platform and API Lead | [member-1-backend.md](member-1-backend.md) |
-| Member 2 | Person B – Data Intelligence and Evaluation Lead | [member-2-pipeline.md](member-2-pipeline.md) |
-| Member 3 | Person C – Product Experience and Quality Lead | [member-3-frontend.md](member-3-frontend.md) |
+| Bao | Person A – Platform and API Lead | [bao-backend.md](bao-backend.md) |
+| Phat | Person B – Data Intelligence and Evaluation Lead | [phat-pipeline.md](phat-pipeline.md) |
+| Huy | Person C – Product Experience and Quality Lead | [huy-frontend.md](huy-frontend.md) |
 
 ## 1. How the Split Follows the Plan
 
 - **One owner, one reviewer per task.** Where the plan names a pair ("A + B"), the first-named person is the owner and the other supports. Two packages are split into an API half and a UI half so each has a single owner: `P2-06` (→ `P2-06a`, `P2-06b`) and `P5-02` (→ `P5-02a`, `P5-02b`). Everything else keeps the plan's ID.
-- **Reviewers follow the [ownership matrix](../docs/IMPLEMENTATION_PLAN.md#5-ownership-matrix):** API and schema are reviewed by Member 2, pipeline by Member 1, evaluation and UX by the other of Members 2/3 as listed per task. Nobody approves their own schema, security or evaluation change.
+- **Reviewers follow the [ownership matrix](../docs/IMPLEMENTATION_PLAN.md#5-ownership-matrix):** API and schema are reviewed by Phat, pipeline by Bao, evaluation and UX by the other of Phat/Huy as listed per task. Nobody approves their own schema, security or evaluation change.
 - **Committed scope is P0 plus one complete P1 correction.** Accounts, bookmarks, map and summaries (P2) are not tasks here and are not counted in the load. They start only after the Week 10 gate and only if every P0/P1 gate is met.
 - **Task rules** (ID, requirement IDs, gate, owner, reviewer, dependencies, status) follow [SPEC §10](../docs/SPEC.md#10-work-breakdown-rules).
 
 ## 2. Phases, Gates and Who Does What
 
-| Phase (weeks) | Member 1 | Member 2 | Member 3 | Gate: passes when |
+| Phase (weeks) | Bao | Phat | Huy | Gate: passes when |
 | :--- | :--- | :--- | :--- | :--- |
 | **1. Foundation** (1–2) | P1-03, P1-04 | P1-05, P1-08 | P1-01, P1-02, P1-06, P1-07 | **G1:** a new member clones, starts the stack, loads the fixture and sees one event in the browser |
 | **2. Ingestion** (3–4) | P2-01, P2-06a | P2-02 – P2-05, P2-07 | P2-06b | **G2:** replaying a fixture feed twice leaves one record per source item; failures are inspectable; no ML starts before this |
@@ -39,21 +39,21 @@ P1-05 worker ┴ P1-08 skeleton ─ P2-02 poll ─ P2-03/04/05 ─ P2-07 ─ [G2
    P3-01 labelled dataset (all three label) ──────────────────────┘
 ```
 
-Almost all of it belongs to Member 2. The labelled dataset is as likely as the code to set the date, so labelling begins as soon as articles are stored. A slip in the reader work (P4) does not move G3; a slip in Member 2's chain does.
+Almost all of it belongs to Phat. The labelled dataset is as likely as the code to set the date, so labelling begins as soon as articles are stored. A slip in the reader work (P4) does not move G3; a slip in Phat's chain does.
 
 ## 3. Handoffs Between Members
 
 | From | To | Deliverable | Needed by |
 | :--- | :--- | :--- | :--- |
-| Member 3 (P1-07) | all | Compose stack, CI, `.env.example` | End of Phase 1 |
-| Member 1 (P1-03) | Member 3 | Error envelope and health/version endpoints; draft OpenAPI | Before P1-06 is finished |
-| Member 1 (P1-04) | Member 2 | First migration, reviewed by Member 2 | Before P1-08 |
-| Member 2 (P3-02) | Member 1 | Chosen embedding model and dimension, set in a migration | Before P3-06 |
-| Member 2 (P3-04) | Members 1, 3 | Meaning of `resolved` / `unknown` / `ambiguous` and of confidence | Before P4-01, P4-05 |
-| Member 2 (P3-07) | Member 1 | Cluster-decision records to project into events | Before P3-08 |
-| Member 1 (P3-08, P4-01 – P4-03) | Member 3 | Stable event projections and frozen API schemas | Start of Phase 4 |
-| Member 2 | Members 1, 3 | Deterministic fixtures covering every UI/API state | Before P4-04 |
-| Member 1 (P5-01) | Members 2, 3 | Review-queue items and API | Before P5-02b |
+| Huy (P1-07) | all | Compose stack, CI, `.env.example` | End of Phase 1 |
+| Bao (P1-03) | Huy | Error envelope and health/version endpoints; draft OpenAPI | Before P1-06 is finished |
+| Bao (P1-04) | Phat | First migration, reviewed by Phat | Before P1-08 |
+| Phat (P3-02) | Bao | Chosen embedding model and dimension, set in a migration | Before P3-06 |
+| Phat (P3-04) | Bao, Huy | Meaning of `resolved` / `unknown` / `ambiguous` and of confidence | Before P4-01, P4-05 |
+| Phat (P3-07) | Bao | Cluster-decision records to project into events | Before P3-08 |
+| Bao (P3-08, P4-01 – P4-03) | Huy | Stable event projections and frozen API schemas | Start of Phase 4 |
+| Phat | Bao, Huy | Deterministic fixtures covering every UI/API state | Before P4-04 |
+| Bao (P5-01) | Phat, Huy | Review-queue items and API | Before P5-02b |
 
 A contract or schema change after delivery needs the receiving member's review.
 
@@ -63,43 +63,43 @@ One accountable member per requirement; "Supports" lists other tasks needed end 
 
 | Requirement | Accountable | Task | Supports |
 | :--- | :--- | :--- | :--- |
-| FR-ING-01 | Member 2 | P2-02 | P2-01, P1-08 |
-| FR-ING-02 | Member 2 | P2-03 | |
-| FR-ING-03 | Member 2 | P2-04 | |
-| FR-ING-04 | Member 2 | P2-05 | |
-| FR-ING-05 | Member 2 | P2-05 | P2-06a, P2-06b |
-| FR-ENR-01 | Member 2 | P3-03 | |
-| FR-ENR-02 | Member 2 | P3-03 | |
-| FR-ENR-03 | Member 2 | P3-04 | P3-02 |
-| FR-ENR-04 | Member 2 | P3-05 | |
-| FR-ENR-05 | Member 2 | P3-06 | P3-02 |
-| FR-CLU-01 | Member 2 | P3-07 | |
-| FR-CLU-02 | Member 2 | P3-07 | P3-10 |
-| FR-CLU-03 | Member 1 | P3-08 | P3-07 |
-| FR-CLU-04 | Member 1 | P5-01 | Member 2 (reconciliation job) |
-| FR-CLU-05 | Member 1 | P3-08, P5-03 | |
-| FR-EVT-01 | Member 3 | P4-04 | P4-01 |
-| FR-EVT-02 | Member 3 | P4-04 | P4-02 |
-| FR-EVT-03 | Member 1 | P4-03 | P4-04 |
-| FR-EVT-04 | Member 3 | P4-05 | P3-04 |
-| FR-EVT-05 | Member 3 | P4-04 | P4-02 |
-| FR-ADM-01 | Member 1 | P5-01 | P3-10 |
-| FR-ADM-02 | Member 1 | P5-02a, P5-03 | P5-02b |
-| FR-ADM-03 | Member 1 | P5-02a | P5-02b |
-| FR-EVA-01 | Member 2 | P3-01 | all (labelling) |
-| FR-EVA-02 | Member 2 | P3-09, P5-07 | |
-| FR-EVA-03 | Member 2 | P3-09 | P5-07 |
-| FR-USR-01, FR-USR-02, FR-MAP-01, FR-SUM-01 | – | deferred (P2) | proposed on unlock: Member 1, Member 1, Member 3, Member 2 |
-| NFR-01 | Member 1 | P5-04 | P2-07 |
-| NFR-02 | Member 2 | P2-04 | P5-04 |
-| NFR-03 | Member 1 | P4-08 | P5-06 |
-| NFR-04 | Member 1 | P5-05 | P2-01, P2-07 |
-| NFR-05 | Member 3 | P4-05 | P5-07 |
-| NFR-06 | Member 3 | P4-06 | P5-06 |
-| NFR-07 | Member 3 | P1-07 | P1-03, P1-04 |
-| NFR-08 | Member 1 | P5-08 | P1-07, P4-07, P5-10 |
-| NFR-09 | Member 1 | P1-03 | P1-05, P5-04 |
-| NFR-10 | Member 2 | P3-05, P5-09 | |
+| FR-ING-01 | Phat | P2-02 | P2-01, P1-08 |
+| FR-ING-02 | Phat | P2-03 | |
+| FR-ING-03 | Phat | P2-04 | |
+| FR-ING-04 | Phat | P2-05 | |
+| FR-ING-05 | Phat | P2-05 | P2-06a, P2-06b |
+| FR-ENR-01 | Phat | P3-03 | |
+| FR-ENR-02 | Phat | P3-03 | |
+| FR-ENR-03 | Phat | P3-04 | P3-02 |
+| FR-ENR-04 | Phat | P3-05 | |
+| FR-ENR-05 | Phat | P3-06 | P3-02 |
+| FR-CLU-01 | Phat | P3-07 | |
+| FR-CLU-02 | Phat | P3-07 | P3-10 |
+| FR-CLU-03 | Bao | P3-08 | P3-07 |
+| FR-CLU-04 | Bao | P5-01 | Phat (reconciliation job) |
+| FR-CLU-05 | Bao | P3-08, P5-03 | |
+| FR-EVT-01 | Huy | P4-04 | P4-01 |
+| FR-EVT-02 | Huy | P4-04 | P4-02 |
+| FR-EVT-03 | Bao | P4-03 | P4-04 |
+| FR-EVT-04 | Huy | P4-05 | P3-04 |
+| FR-EVT-05 | Huy | P4-04 | P4-02 |
+| FR-ADM-01 | Bao | P5-01 | P3-10 |
+| FR-ADM-02 | Bao | P5-02a, P5-03 | P5-02b |
+| FR-ADM-03 | Bao | P5-02a | P5-02b |
+| FR-EVA-01 | Phat | P3-01 | all (labelling) |
+| FR-EVA-02 | Phat | P3-09, P5-07 | |
+| FR-EVA-03 | Phat | P3-09 | P5-07 |
+| FR-USR-01, FR-USR-02, FR-MAP-01, FR-SUM-01 | – | deferred (P2) | proposed on unlock: Bao, Bao, Huy, Phat |
+| NFR-01 | Bao | P5-04 | P2-07 |
+| NFR-02 | Phat | P2-04 | P5-04 |
+| NFR-03 | Bao | P4-08 | P5-06 |
+| NFR-04 | Bao | P5-05 | P2-01, P2-07 |
+| NFR-05 | Huy | P4-05 | P5-07 |
+| NFR-06 | Huy | P4-06 | P5-06 |
+| NFR-07 | Huy | P1-07 | P1-03, P1-04 |
+| NFR-08 | Bao | P5-08 | P1-07, P4-07, P5-10 |
+| NFR-09 | Bao | P1-03 | P1-05, P5-04 |
+| NFR-10 | Phat | P3-05, P5-09 | |
 
 ## 5. Load
 
@@ -107,18 +107,18 @@ Weights: S = 1, M = 2, L = 3. Counts are tasks in the committed scope only.
 
 | Member | Tasks | S / M / L | Weight |
 | :--- | :--- | :--- | :--- |
-| Member 1 | 15 | 4 / 11 / 0 | 26 |
-| Member 2 | 17 | 2 / 12 / 3 | 35 |
-| Member 3 | 13 | 4 / 8 / 1 | 23 |
+| Bao | 15 | 4 / 11 / 0 | 26 |
+| Phat | 17 | 2 / 12 / 3 | 35 |
+| Huy | 13 | 4 / 8 / 1 | 23 |
 
-Member 2's weight (35) is about 25% above the average (28) and sits on the critical path. The plan's ownership is kept as assigned; if Member 2 falls behind, move these first, in this order:
+Phat's weight (35) is about 25% above the average (28) and sits on the critical path. The plan's ownership is kept as assigned; if Phat falls behind, move these first, in this order:
 
-1. P2-07 (ingestion integration tests) → Member 1.
-2. P3-05 (geocoder adapter) → Member 1.
-3. Labelling coordination within P3-01 → Member 3 (already light in Phases 2–3).
-4. P5-09 (demo dataset) → Member 3.
+1. P2-07 (ingestion integration tests) → Bao.
+2. P3-05 (geocoder adapter) → Bao.
+3. Labelling coordination within P3-01 → Huy (already light in Phases 2–3).
+4. P5-09 (demo dataset) → Huy.
 
-Member 1 has spare capacity in Phase 3 beyond P3-08; use it for pipeline reviews, labelling, and starting P4-01 against fixtures. Review the balance at every gate.
+Bao has spare capacity in Phase 3 beyond P3-08; use it for pipeline reviews, labelling, and starting P4-01 against fixtures. Review the balance at every gate.
 
 ## 6. Open Decisions
 
@@ -126,15 +126,15 @@ From [PRD §10](../docs/PRD.md#10-open-product-decisions) and [plan §14.1](../d
 
 | # | Decision | Driver | Decide by | Blocks |
 | :--- | :--- | :--- | :--- | :--- |
-| D-01 | Final feed list (5–15) and terms-of-use review | Member 2 | Week 1 | P2-02 |
-| D-02 | Three to five topics and how an event gets its topic | Member 2 with Member 3 | Week 2 | P1-08 fixtures, P4-03 |
-| D-03 | Language set for the evaluated MVP | Member 2 | Week 2 | P3-02 |
-| D-04 | Content-retention policy: full text, excerpt, metadata or hashes | Member 3 | Week 1 | P2-03, fixtures, P4-04 |
-| D-05 | Evaluation dataset size and labelling ownership | Member 2 | Week 2 | P3-01 |
-| D-06 | Hosting budget and demonstration environment | Member 3 | Week 2 | P5-08 |
+| D-01 | Final feed list (5–15) and terms-of-use review | Phat | Week 1 | P2-02 |
+| D-02 | Three to five topics and how an event gets its topic | Phat with Huy | Week 2 | P1-08 fixtures, P4-03 |
+| D-03 | Language set for the evaluated MVP | Phat | Week 2 | P3-02 |
+| D-04 | Content-retention policy: full text, excerpt, metadata or hashes | Huy | Week 1 | P2-03, fixtures, P4-04 |
+| D-05 | Evaluation dataset size and labelling ownership | Phat | Week 2 | P3-01 |
+| D-06 | Hosting budget and demonstration environment | Huy | Week 2 | P5-08 |
 | D-07 | Who takes Person A, B, C; alignment with the course rubric and with P2 deferral | Team | Week 1 | everything |
-| D-08 | Seeded dataset volume and the repeatable performance command | Member 1 | End of Week 2 | P4-08 |
-| D-09 | How administrator access is protected in P0/P1 before P2 accounts exist | Member 1 | Before P2-06a | P2-06a, P5-01, P5-02a |
+| D-08 | Seeded dataset volume and the repeatable performance command | Bao | End of Week 2 | P4-08 |
+| D-09 | How administrator access is protected in P0/P1 before P2 accounts exist | Bao | Before P2-06a | P2-06a, P5-01, P5-02a |
 
 Suggestion for D-09: a single admin credential or token from the environment, recorded as the audit actor, and an ADR noting it is replaced if accounts (P2) are built.
 
