@@ -2,6 +2,8 @@
 
 Part of the [work split](README.md). Authority: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [SPEC](../docs/SPEC.md), [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md#43-person-c--product-experience-and-quality-lead). Package IDs (`P#-##`) are the plan's.
 
+For explanations, practical steps, handoffs, and completion evidence for this role, read [Huy's role guide](../docs/HUY_ROLE_GUIDE.md).
+
 **You own:** the React application and its API client boundary, the feed, detail, timeline, filters and reviewer screens, loading/empty/partial/error states, responsiveness and accessibility, CI and Docker Compose, Playwright end-to-end tests, and the release checklist and demo flow.
 
 **You do not wait for the pipeline.** Build against the draft OpenAPI contract and fixtures from Phase 1, and switch to the real API once P4-01 – P4-03 exist.
