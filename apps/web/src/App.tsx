@@ -1,38 +1,36 @@
-import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import { getVersion } from "./api";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { Footer, Header } from "./components/Layout";
+import EventDetail from "./pages/EventDetail";
+import Feed from "./pages/Feed";
+import Search from "./pages/Search";
+import Sources from "./pages/Sources";
 
-function Home() {
-  const [status, setStatus] = useState("checking API…");
-
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    getVersion()
-      .then((v) => setStatus(`API v${v.version} (${v.environment})`))
-      .catch(() => setStatus("API unavailable"));
-  }, []);
-
-  return (
-    <section>
-      <h1>Events</h1>
-      <p>No events yet. {status}</p>
-    </section>
-  );
+    if (!hash) window.scrollTo({ top: 0 });
+    else document.getElementById(hash.slice(1))?.scrollIntoView();
+  }, [pathname, hash]);
+  return null;
 }
 
 export default function App() {
   return (
     <>
-      <a href="#main" className="skip-link">
-        Skip to content
-      </a>
-      <header>
-        <strong>Geo News</strong>
-      </header>
-      <main id="main">
+      <a href="#main" className="skip-link">Skip to content</a>
+      <Header />
+      <ScrollToTop />
+      <main id="main" tabIndex={-1}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Feed />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/events/:id" element={<EventDetail />} />
+          <Route path="/sources" element={<Sources />} />
+          <Route path="*" element={<Feed />} />
         </Routes>
       </main>
+      <Footer />
     </>
   );
 }
