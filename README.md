@@ -65,7 +65,6 @@ geo-news/
 ├── docs/               # PRD, TRD, SPEC, Implementation Plan, adr/
 ├── split/              # work split
 ├── compose.yaml, .env.example, pyproject.toml, .github/workflows/ci.yml
-└── Backend/ Database/ Frontend/ ExternalServices/   # legacy placeholders, safe to delete
 ```
 
 ## Prerequisites
