@@ -1,0 +1,10 @@
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+pythonpath = ["apps/api", "workers/pipeline/src", "packages/geo_news/src"]
+testpaths = ["apps/api/tests", "workers/pipeline/tests"]

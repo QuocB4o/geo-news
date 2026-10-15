@@ -2,7 +2,7 @@
 
 Geo News is a Vietnam-first news aggregator that groups duplicate coverage into location-aware events while preserving every contributing source.
 
-> **Status:** Planning stage. The repository contains documentation only; the technology stack is decided and the work is [split across the three team members](split/README.md). Sections marked `TBD` will be filled in with the first implementation.
+> **Status:** Phase 1 scaffold in place (health/version API, worker skeleton, React shell, Compose, CI). No product features yet. Work is [split across the three team members](split/README.md).
 
 ## Overview
 
@@ -56,15 +56,17 @@ The web app never touches the database, feeds or models; the API serves queries 
 
 ```text
 geo-news/
-├── docs/               # PRD, TRD, SPEC, Implementation Plan
-├── split/              # work split: team plan and per-member task lists
-├── Backend/            # placeholder (.gitkeep)
-├── Database/           # placeholder (.gitkeep)
-├── Frontend/           # placeholder (.gitkeep)
-└── ExternalServices/   # placeholder (.gitkeep)
+├── apps/api/           # FastAPI app (health, version, error envelope)
+├── apps/web/           # React + TypeScript + Vite shell
+├── workers/pipeline/   # APScheduler worker, stage/status enums
+├── packages/geo_news/  # shared Python config
+├── db/                 # migrations/ and seeds/ (empty until P1-04)
+├── tests/fixtures/     # deterministic fixtures
+├── docs/               # PRD, TRD, SPEC, Implementation Plan, adr/
+├── split/              # work split
+├── compose.yaml, .env.example, pyproject.toml, .github/workflows/ci.yml
+└── Backend/ Database/ Frontend/ ExternalServices/   # legacy placeholders, safe to delete
 ```
-
-The four placeholder directories are replaced by the layout proposed in [TRD §4](docs/TRD.md#4-proposed-repository-layout) (`apps/`, `workers/`, `packages/`, `db/`, `tests/`, `compose.yaml`) when the first vertical slice is scaffolded (task P1-02).
 
 ## Prerequisites
 
@@ -72,7 +74,12 @@ Git, Python 3.12+, Node.js 20+ (LTS), Docker with Compose. PostgreSQL 16 with pg
 
 ## Installation
 
-`TBD` – no installable code exists yet. This section is completed with the first implementation.
+```bash
+cp .env.example .env            # set POSTGRES_PASSWORD and APP_SECRET_KEY
+python -m venv .venv && . .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install ./packages/geo_news ./apps/api ./workers/pipeline
+cd apps/web && npm install
+```
 
 ## Environment Configuration
 
@@ -92,7 +99,13 @@ Feed sources are validated database records, not environment variables.
 
 ## Running and Testing
 
-`TBD` – no run or test commands yet. The test approach and CI gates are in [SPEC §7–9](docs/SPEC.md#7-verification-matrix); the target is a clean-environment start through documented Docker Compose commands.
+```bash
+docker compose up --build      # db :5432, api :8000, worker, web :5173
+ruff check . && pytest         # Python lint and tests
+cd apps/web && npm run build   # type-check and build the web app
+```
+
+Check the API at `http://localhost:8000/api/v1/health/live`. The test approach and CI gates are in [SPEC §7–9](docs/SPEC.md#7-verification-matrix).
 
 ## Roadmap
 
