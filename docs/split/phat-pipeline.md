@@ -1,6 +1,6 @@
 # Phat – Data Intelligence and Evaluation (proposed Person B)
 
-Part of the [work split](README.md). Authority: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [SPEC](../docs/SPEC.md), [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md#42-person-b--data-intelligence-and-evaluation-lead). Package IDs (`P#-##`) are the plan's.
+Part of the [work split](README.md). Authority: [PRD](../PRD.md), [TRD](../TRD.md), [SPEC](../SPEC.md), [Implementation Plan](../IMPLEMENTATION_PLAN.md#42-person-b--data-intelligence-and-evaluation-lead). Package IDs (`P#-##`) are the plan's.
 
 **You own:** feed ingestion, normalization and processing state, duplicate detection, entity/location extraction and the geocoder adapter, embeddings, candidate retrieval, clustering, label guidelines, the evaluation command and its reports.
 
@@ -80,11 +80,11 @@ Supporting (not owned): you reuse P2-01 for fetch validation, provide the two-so
 - Each eligible article has a vector with model version, dimension, content hash and completion time; exact duplicates reuse it; incompatible versions are never compared.
 
 **P3-07 – Candidates and scoring**
-- Candidates come from a bounded recent window with only safe topic/location filters; every considered candidate stores semantic, entity, location and time scores, combined score, threshold and configuration version ([TRD §6.5](../docs/TRD.md#65-embeddings-and-clustering)).
+- Candidates come from a bounded recent window with only safe topic/location filters; every considered candidate stores semantic, entity, location and time scores, combined score, threshold and configuration version ([TRD §6.5](../TRD.md#65-embeddings-and-clustering)).
 
 **P3-09 – Evaluation command**
 - One documented command reports git revision, dataset/model/configuration versions, weights, thresholds, duplicate, pairwise and B-cubed clustering metrics, false merges/splits with examples, location accuracy and coverage, latency and the raw-to-event reduction.
-- The baseline report is reproducible; gate G3 passes when the fixture dataset yields the cases listed in [plan Phase 3](../docs/IMPLEMENTATION_PLAN.md#7-phase-plan).
+- The baseline report is reproducible; gate G3 passes when the fixture dataset yields the cases listed in [plan Phase 3](../IMPLEMENTATION_PLAN.md#7-phase-plan).
 
 **P5-07 – Final report**
 - The held-out evaluation is run once on the release configuration with limitations and target misses stated.

@@ -1,6 +1,6 @@
 # Work Split – Geo News
 
-How the work in the [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md) is divided across the three team members. Requirements are not repeated here: every task links to [SPEC](../docs/SPEC.md) requirement IDs, and task IDs (`P1-01` … `P5-10`) are the plan's own work packages.
+How the work in the [Implementation Plan](../IMPLEMENTATION_PLAN.md) is divided across the three team members. Requirements are not repeated here: every task links to [SPEC](../SPEC.md) requirement IDs, and task IDs (`P1-01` … `P5-10`) are the plan's own work packages.
 
 > **Status:** proposal for team review. The plan's roles (Person A, B, C) are mapped to Bao, Phat, Huy below; Bao, Phat and Huy take these roles (decision D-07, role assignment). Sizes are rough (S ≈ a few days, M ≈ about a week, L ≈ about two weeks of one person's time), not commitments.
 
@@ -13,9 +13,9 @@ How the work in the [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md) is div
 ## 1. How the Split Follows the Plan
 
 - **One owner, one reviewer per task.** Where the plan names a pair ("A + B"), the first-named person is the owner and the other supports. Two packages are split into an API half and a UI half so each has a single owner: `P2-06` (→ `P2-06a`, `P2-06b`) and `P5-02` (→ `P5-02a`, `P5-02b`). Everything else keeps the plan's ID.
-- **Reviewers follow the [ownership matrix](../docs/IMPLEMENTATION_PLAN.md#5-ownership-matrix):** API and schema are reviewed by Phat, pipeline by Bao, evaluation and UX by the other of Phat/Huy as listed per task. Nobody approves their own schema, security or evaluation change.
+- **Reviewers follow the [ownership matrix](../IMPLEMENTATION_PLAN.md#5-ownership-matrix):** API and schema are reviewed by Phat, pipeline by Bao, evaluation and UX by the other of Phat/Huy as listed per task. Nobody approves their own schema, security or evaluation change.
 - **Committed scope is P0 plus one complete P1 correction.** Accounts, bookmarks, map and summaries (P2) are not tasks here and are not counted in the load. They start only after the Week 10 gate and only if every P0/P1 gate is met.
-- **Task rules** (ID, requirement IDs, gate, owner, reviewer, dependencies, status) follow [SPEC §10](../docs/SPEC.md#10-work-breakdown-rules).
+- **Task rules** (ID, requirement IDs, gate, owner, reviewer, dependencies, status) follow [SPEC §10](../SPEC.md#10-work-breakdown-rules).
 
 ## 2. Phases, Gates and Who Does What
 
@@ -27,7 +27,7 @@ How the work in the [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md) is div
 | **4. Reader MVP** (7–8) | P4-01 – P4-03, P4-08 | supports with fixtures | P4-04 – P4-07 | **G4:** feed, detail, provenance and filters pass end-to-end tests |
 | **5. Review and release** (9–12) | P5-01 – P5-05, P5-08 | P5-07, P5-09 | P5-02b, P5-06, P5-10 | **G5** (end of Week 10): one audited correction and hardening done, scope frozen. **G6** (Week 12): tagged, reproducible, demonstrable |
 
-Gate rules and fallbacks are in [plan §8](../docs/IMPLEMENTATION_PLAN.md#8-milestones-and-decision-gates).
+Gate rules and fallbacks are in [plan §8](../IMPLEMENTATION_PLAN.md#8-milestones-and-decision-gates).
 
 ### Critical path
 
@@ -122,7 +122,7 @@ Bao has spare capacity in Phase 3 beyond P3-08; use it for pipeline reviews, lab
 
 ## 6. Open Decisions
 
-From [PRD §10](../docs/PRD.md#10-open-product-decisions) and [plan §14.1](../docs/IMPLEMENTATION_PLAN.md#141-decisions-due-by-end-of-week-1). Team members decide; the driver brings a recommendation.
+From [PRD §10](../PRD.md#10-open-product-decisions) and [plan §14.1](../IMPLEMENTATION_PLAN.md#141-decisions-due-by-end-of-week-1). Team members decide; the driver brings a recommendation.
 
 | # | Decision | Driver | Decide by | Blocks |
 | :--- | :--- | :--- | :--- | :--- |
@@ -142,9 +142,9 @@ Suggestion for D-09: a single admin credential or token from the environment, re
 
 Found while preparing this split. Not fixed here.
 
-1. **No administrator identity in P0/P1.** [SPEC](../docs/SPEC.md) lists `/admin/sources` as P0/P1 and the audit record needs an actor, but authentication and accounts are P2 (`FR-USR-01`). How admin endpoints are protected is not specified → D-09.
-2. **Seeded volume undefined.** [TRD §10](../docs/TRD.md#10-performance-baseline) says the SPEC must define it before optimization, but the SPEC does not → D-08.
-3. **Inspection endpoint missing from the API baseline.** Plan package P2-06 needs an article/processing inspection endpoint that is not in [SPEC §5](../docs/SPEC.md#5-api-acceptance-baseline); P2-06a adds it to `openapi.yaml`.
+1. **No administrator identity in P0/P1.** [SPEC](../SPEC.md) lists `/admin/sources` as P0/P1 and the audit record needs an actor, but authentication and accounts are P2 (`FR-USR-01`). How admin endpoints are protected is not specified → D-09.
+2. **Seeded volume undefined.** [TRD §10](../TRD.md#10-performance-baseline) says the SPEC must define it before optimization, but the SPEC does not → D-08.
+3. **Inspection endpoint missing from the API baseline.** Plan package P2-06 needs an article/processing inspection endpoint that is not in [SPEC §5](../SPEC.md#5-api-acceptance-baseline); P2-06a adds it to `openapi.yaml`.
 4. **Topic assignment unspecified.** Events have a topic and a topic filter (`FR-EVT-03`), but no requirement says how a topic is assigned → D-02.
 5. **Event title unspecified.** No requirement says how an event title is derived; TRD only says projections include it. Propose the earliest article's title as the starting rule in P3-08.
-6. **Placeholders versus layout.** The repo's empty `Backend/`, `Database/`, `Frontend/`, `ExternalServices/` do not match the [TRD §4](../docs/TRD.md#4-proposed-repository-layout) layout; P1-02 replaces them.
+6. **Placeholders versus layout.** The repo's empty `Backend/`, `Database/`, `Frontend/`, `ExternalServices/` do not match the [TRD §4](../TRD.md#4-proposed-repository-layout) layout; P1-02 replaces them.

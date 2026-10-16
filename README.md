@@ -2,7 +2,7 @@
 
 Geo News is a Vietnam-first news aggregator that groups duplicate coverage into location-aware events while preserving every contributing source.
 
-> **Status:** Phase 1 scaffold in place (health/version API, worker skeleton, React shell, Compose, CI). No product features yet. Work is [split across the three team members](split/README.md).
+> **Status:** Phase 1 scaffold in place (health/version API, worker skeleton, React shell, Compose, CI). No product features yet. Work is [split across the three team members](docs/split/README.md).
 
 ## Overview
 
@@ -62,8 +62,7 @@ geo-news/
 ├── packages/geo_news/  # shared Python config
 ├── db/                 # migrations/ and seeds/ (empty until P1-04)
 ├── tests/fixtures/     # deterministic fixtures
-├── docs/               # PRD, TRD, SPEC, Implementation Plan, adr/
-├── split/              # work split
+├── docs/               # PRD, TRD, SPEC, Implementation Plan, split/ (work split), adr/
 ├── compose.yaml, .env.example, pyproject.toml, .github/workflows/ci.yml
 ```
 
@@ -128,7 +127,7 @@ Roles come from the [Implementation Plan](docs/IMPLEMENTATION_PLAN.md#4-recommen
 | Phat | Data Intelligence and Evaluation Lead | Ingestion, duplicates, location, embeddings, clustering, evaluation |
 | Huy | Product Experience and Quality Lead | React app, accessibility, CI and Compose, end-to-end tests, release |
 
-Task lists: [work split](split/README.md).
+Task lists: [work split](docs/split/README.md).
 
 ## Documentation
 
@@ -138,6 +137,6 @@ Task lists: [work split](split/README.md).
 | [TRD](docs/TRD.md) | Architecture, technology decisions, data model, pipeline, API baseline, security, deployment |
 | [SPEC](docs/SPEC.md) | Canonical requirements, acceptance criteria, evaluation specification, verification matrix |
 | [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) | Roles, phases, work packages, gates, risks, release checklist |
-| [Work split](split/README.md) | Assignment of the plan's work packages to the three members |
+| [Work split](docs/split/README.md) | Assignment of the plan's work packages to the three members |
 
 The PRD sets intent and priority, the TRD the technical solution, and the SPEC what counts as done; the Implementation Plan covers delivery.

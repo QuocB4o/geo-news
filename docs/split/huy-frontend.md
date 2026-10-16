@@ -1,6 +1,6 @@
 # Huy – Product Experience and Quality (proposed Person C)
 
-Part of the [work split](README.md). Authority: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [SPEC](../docs/SPEC.md), [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md#43-person-c--product-experience-and-quality-lead). Package IDs (`P#-##`) are the plan's.
+Part of the [work split](README.md). Authority: [PRD](../PRD.md), [TRD](../TRD.md), [SPEC](../SPEC.md), [Implementation Plan](../IMPLEMENTATION_PLAN.md#43-person-c--product-experience-and-quality-lead). Package IDs (`P#-##`) are the plan's.
 
 **You own:** the React application and its API client boundary, the feed, detail, timeline, filters and reviewer screens, loading/empty/partial/error states, responsiveness and accessibility, CI and Docker Compose, Playwright end-to-end tests, and the release checklist and demo flow.
 
@@ -33,10 +33,10 @@ Supporting (not owned): labelling a share of the evaluation dataset ([P3-01](pha
 ## Acceptance Criteria
 
 **P1-01 – Decisions**
-- Each Week 1–2 item in [PRD §10](../docs/PRD.md#10-open-product-decisions) has an owner and a recorded outcome (see README decisions D-01 – D-09).
+- Each Week 1–2 item in [PRD §10](../PRD.md#10-open-product-decisions) has an owner and a recorded outcome (see README decisions D-01 – D-09).
 
 **P1-02 – Repository structure**
-- The layout in [TRD §4](../docs/TRD.md#4-proposed-repository-layout) is created, replacing the empty placeholder directories; a contribution guide records branch, review and definition-of-done rules; `.env.example` lists the [TRD §11.3](../docs/TRD.md#113-configuration-baseline) variables with no real values.
+- The layout in [TRD §4](../TRD.md#4-proposed-repository-layout) is created, replacing the empty placeholder directories; a contribution guide records branch, review and definition-of-done rules; `.env.example` lists the [TRD §11.3](../TRD.md#113-configuration-baseline) variables with no real values.
 
 **P1-06 – React shell**
 - The app builds and runs, has routing, a typed API client in one module, and a keyboard-navigable shell with landmarks and a skip link.
@@ -62,7 +62,7 @@ Supporting (not owned): labelling a share of the evaluation dataset ([P3-01](pha
 - Automated checks pass and a keyboard-only pass finds no blocker, at desktop and mobile widths (WCAG 2.1 AA targets: contrast, labels, focus, semantics).
 
 **P4-07 – Reader-journey tests**
-- Playwright covers the discover-and-verify journey from [PRD §6.1](../docs/PRD.md#61-discover-and-verify-an-event) on deterministic fixtures. Gate G4 passes when it and the provenance tests pass.
+- Playwright covers the discover-and-verify journey from [PRD §6.1](../PRD.md#61-discover-and-verify-an-event) on deterministic fixtures. Gate G4 passes when it and the provenance tests pass.
 
 **P5-02b – Correction UI**
 - A reviewer can open an event or queue item, see scores and evidence, enter a required reason and apply the correction; the resulting change and audit entry are visible.
@@ -71,4 +71,4 @@ Supporting (not owned): labelling a share of the evaluation dataset ([P3-01](pha
 - Accessibility and p95 results are re-measured against Phase 4 and recorded; regressions are fixed or logged.
 
 **P5-10 – Release**
-- Every item in the [release checklist](../docs/IMPLEMENTATION_PLAN.md#16-release-readiness-checklist) is ticked or its miss is documented; a tag exists; the demo and recorded fallback are rehearsed.
+- Every item in the [release checklist](../IMPLEMENTATION_PLAN.md#16-release-readiness-checklist) is ticked or its miss is documented; a tag exists; the demo and recorded fallback are rehearsed.

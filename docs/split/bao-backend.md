@@ -1,6 +1,6 @@
 # Bao – Platform and API (proposed Person A)
 
-Part of the [work split](README.md). Authority: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [SPEC](../docs/SPEC.md), [Implementation Plan](../docs/IMPLEMENTATION_PLAN.md#41-person-a--platform-and-api-lead). Package IDs (`P#-##`) are the plan's.
+Part of the [work split](README.md). Authority: [PRD](../PRD.md), [TRD](../TRD.md), [SPEC](../SPEC.md), [Implementation Plan](../IMPLEMENTATION_PLAN.md#41-person-a--platform-and-api-lead). Package IDs (`P#-##`) are the plan's.
 
 **You own:** the FastAPI application and its public/admin contracts, the PostgreSQL schema and Alembic migrations, event projections and transaction boundaries, operational endpoints, review/correction commands with audit, API security and performance, and deployment/recovery.
 
@@ -33,12 +33,12 @@ Supporting (not owned): you implement the projection refresh used by P3-08 for t
 ## Acceptance Criteria
 
 **P1-03 – FastAPI scaffold**
-- The API starts from the Compose file; `GET /api/v1/health/live`, `/health/ready` and `/version` respond ([SPEC §5](../docs/SPEC.md#5-api-acceptance-baseline)).
+- The API starts from the Compose file; `GET /api/v1/health/live`, `/health/ready` and `/version` respond ([SPEC §5](../SPEC.md#5-api-acceptance-baseline)).
 - Every error uses the `code` / safe `message` / `correlationId` shape; a correlation ID is generated if the caller sends none and appears in logs.
-- Configuration comes from environment variables listed in [TRD §11.3](../docs/TRD.md#113-configuration-baseline); no secret is in the repository.
+- Configuration comes from environment variables listed in [TRD §11.3](../TRD.md#113-configuration-baseline); no secret is in the repository.
 
 **P1-04 – Database and first migration**
-- The first migration applies to an empty PostgreSQL 16 with pgvector enabled and creates enough of the [TRD §5](../docs/TRD.md#5-logical-data-model) entities (at least `source`, `article`, `article_processing`, `event`, `event_article_membership`) for the walking skeleton.
+- The first migration applies to an empty PostgreSQL 16 with pgvector enabled and creates enough of the [TRD §5](../TRD.md#5-logical-data-model) entities (at least `source`, `article`, `article_processing`, `event`, `event_article_membership`) for the walking skeleton.
 - The partial unique constraint "one active membership per article" and the `(source_id, external_id)` uniqueness exist.
 - The embedding column dimension is a placeholder until P3-02 reports the model; a later migration sets it.
 - Phat has approved the migration.
@@ -62,7 +62,7 @@ Supporting (not owned): you implement the projection refresh used by P3-08 for t
 
 **P4-02 – Detail, timeline, sources**
 - `GET /events/{id}`, `/events/{id}/articles` and `/sources` match the OpenAPI contract and expose every active contributing article with its source name and original link.
-- Fixed routes are registered before dynamic ones ([TRD §7](../docs/TRD.md#7-api-contract-baseline)).
+- Fixed routes are registered before dynamic ones ([TRD §7](../TRD.md#7-api-contract-baseline)).
 
 **P4-03 – Filters**
 - Topic, location, source, date range and text filters work alone and combined and return deterministic results; invalid ranges and page sizes return validation errors.
@@ -84,7 +84,7 @@ Supporting (not owned): you implement the projection refresh used by P3-08 for t
 - Injected feed, geocoder and model failures do not stop unrelated items or hide published events; replay and concurrent-claim tests pass; logs carry correlation/job IDs and no secrets.
 
 **P5-05 – Security review**
-- The [TRD §8](../docs/TRD.md#8-security-and-source-safety) checklist is walked through and findings recorded; CORS is limited to configured origins; no critical finding is open at release.
+- The [TRD §8](../TRD.md#8-security-and-source-safety) checklist is walked through and findings recorded; CORS is limited to configured origins; no critical finding is open at release.
 
 **P5-08 – Deployment and recovery**
 - The system runs on the chosen demo host over HTTPS with restricted database access; backup, restore and rollback are rehearsed from written steps; a clean install passes.
