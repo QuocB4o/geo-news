@@ -69,7 +69,7 @@ The numeric product targets remain those in [PRD §3](PRD.md#3-success-measures)
 
 - Three-person team with shared review responsibilities.
 - Twelve-week fixed delivery window.
-- New implementation; the repository currently contains planning artifacts and placeholders.
+- New implementation; the repository contains the planning documents and the Phase 1 scaffold (health/version API, worker stage enums, React shell, Compose, CI), with no product features yet.
 - FastAPI/Python pipeline, React/TypeScript, PostgreSQL/pgvector, and Docker Compose baseline.
 - Model and geocoder selection must be supported by a Vietnamese/English spike.
 - Live feed use depends on source terms and the approved retention policy.

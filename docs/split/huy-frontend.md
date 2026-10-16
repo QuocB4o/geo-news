@@ -15,9 +15,9 @@ Part of the [work split](README.md). Authority: [PRD](../PRD.md), [TRD](../TRD.m
 | ID | Task | Requirements | Gate | Size | Reviewer | Depends on | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-01 | Facilitate decisions: feeds, topics, languages, retention, evaluation volume, hosting | PRD open decisions | G1 | S | Team | – | Not started |
-| P1-02 | Repository structure, contribution guide, environment example, conventions | NFR-07 | G1 | S | Bao | P1-01 | Not started |
-| P1-06 | React app: routing, API boundary, accessible shell | NFR-06, NFR-07 | G1 | M | Bao | P1-02 | Not started |
-| P1-07 | Docker Compose and CI: format, static analysis, tests, migration-from-empty, requirement-ID check | NFR-07, NFR-08 | G1 | M | Bao | P1-03 – P1-06 | Not started |
+| P1-02 | Repository structure, contribution guide, environment example, conventions | NFR-07 | G1 | S | Bao | P1-01 | In progress (scaffold in repo) |
+| P1-06 | React app: routing, API boundary, accessible shell | NFR-06, NFR-07 | G1 | M | Bao | P1-02 | In progress (scaffold in repo) |
+| P1-07 | Docker Compose and CI: format, static analysis, tests, migration-from-empty, requirement-ID check | NFR-07, NFR-08 | G1 | M | Bao | P1-03 – P1-06 | In progress (scaffold in repo) |
 | P2-06b | Article/processing inspection screen *(UI half of plan P2-06)* | FR-ING-05 | G2 | S | Bao | P2-06a | Not started |
 | P3-10 | Explainability display for internal inspection | enables FR-ADM-01 | G3 | S | Bao | P3-07, P3-08 | Not started |
 | P4-04 | Event feed, detail, timeline, provenance, filter controls and source disclosure UI | FR-EVT-01, FR-EVT-02, FR-EVT-03, FR-EVT-05 | G4 | L | Bao | P4-01 – P4-03 | Not started |

@@ -138,5 +138,6 @@ Task lists: [work split](docs/split/README.md).
 | [SPEC](docs/SPEC.md) | Canonical requirements, acceptance criteria, evaluation specification, verification matrix |
 | [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) | Roles, phases, work packages, gates, risks, release checklist |
 | [Work split](docs/split/README.md) | Assignment of the plan's work packages to the three members |
+| [Project structure](docs/PROJECT_STRUCTURE.md) | Annotated directory tree, component boundaries, ownership, where future work lands |
 
 The PRD sets intent and priority, the TRD the technical solution, and the SPEC what counts as done; the Implementation Plan covers delivery.

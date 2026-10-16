@@ -147,4 +147,4 @@ Found while preparing this split. Not fixed here.
 3. **Inspection endpoint missing from the API baseline.** Plan package P2-06 needs an article/processing inspection endpoint that is not in [SPEC §5](../SPEC.md#5-api-acceptance-baseline); P2-06a adds it to `openapi.yaml`.
 4. **Topic assignment unspecified.** Events have a topic and a topic filter (`FR-EVT-03`), but no requirement says how a topic is assigned → D-02.
 5. **Event title unspecified.** No requirement says how an event title is derived; TRD only says projections include it. Propose the earliest article's title as the starting rule in P3-08.
-6. **Placeholders versus layout.** The repo's empty `Backend/`, `Database/`, `Frontend/`, `ExternalServices/` do not match the [TRD §4](../TRD.md#4-proposed-repository-layout) layout; P1-02 replaces them.
+6. ~~**Placeholders versus layout.**~~ Resolved: the empty `Backend/`, `Database/`, `Frontend/` and `ExternalServices/` placeholders were removed and the TRD §4 layout scaffolded (see [PROJECT_STRUCTURE.md](../PROJECT_STRUCTURE.md)); P1-02 still owes the contribution guide.

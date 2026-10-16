@@ -85,7 +85,7 @@ geo-news/
 └── compose.yaml
 ```
 
-The current empty top-level placeholders may be replaced when the first vertical slice is scaffolded.
+The legacy top-level placeholders were replaced by this layout in the Phase 1 scaffold. See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for current status.
 
 ## 5. Logical Data Model
 

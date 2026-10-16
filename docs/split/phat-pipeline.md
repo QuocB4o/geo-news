@@ -14,7 +14,7 @@ Part of the [work split](README.md). Authority: [PRD](../PRD.md), [TRD](../TRD.m
 
 | ID | Task | Requirements | Gate | Size | Reviewer | Depends on | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| P1-05 | Pipeline worker scaffold: stage interface, configuration, structured job logging | NFR-01, NFR-02, NFR-09 | G1 | M | Bao | – | Not started |
+| P1-05 | Pipeline worker scaffold: stage interface, configuration, structured job logging | NFR-01, NFR-02, NFR-09 | G1 | M | Bao | – | In progress (scaffold in repo) |
 | P1-08 | Fixture feed and a temporary deterministic assignment that reaches one event card | FR-ING-01–05, FR-EVT-01–02 | G1 | M | Bao | P1-03 – P1-06 | Not started |
 | P2-02 | Feed polling with timeouts, redirect/content limits and feed-run records | FR-ING-01, FR-ING-05, NFR-01 | G2 | M | Bao | P2-01, D-01 | Not started |
 | P2-03 | Deterministic Unicode, text, time and language normalization | FR-ING-02 | G2 | S | Bao | P2-02, D-04 | Not started |

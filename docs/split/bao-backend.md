@@ -12,7 +12,7 @@ Part of the [work split](README.md). Authority: [PRD](../PRD.md), [TRD](../TRD.m
 
 | ID | Task | Requirements | Gate | Size | Reviewer | Depends on | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| P1-03 | FastAPI scaffold: config, error envelope, correlation ID, health/version endpoints | NFR-07, NFR-09 | G1 | S | Phat | – | Not started |
+| P1-03 | FastAPI scaffold: config, error envelope, correlation ID, health/version endpoints | NFR-07, NFR-09 | G1 | S | Phat | – | In progress (scaffold in repo) |
 | P1-04 | PostgreSQL + pgvector, SQLAlchemy, Alembic, first migration | NFR-07, NFR-08 | G1 | M | Phat | – | Not started |
 | P2-01 | Source configuration and destination allowlist validation | FR-ING-01, NFR-04 | G2 | M | Phat | P1-04 | Not started |
 | P2-06a | Article/processing inspection endpoint *(API half of plan P2-06)* | FR-ING-05 | G2 | S | Huy | P1-04, P2-05 | Not started |
