@@ -148,3 +148,19 @@ Found while preparing this split. Not fixed here.
 4. **Topic assignment unspecified.** Events have a topic and a topic filter (`FR-EVT-03`), but no requirement says how a topic is assigned → D-02.
 5. **Event title unspecified.** No requirement says how an event title is derived; TRD only says projections include it. Propose the earliest article's title as the starting rule in P3-08.
 6. ~~**Placeholders versus layout.**~~ Resolved: the empty `Backend/`, `Database/`, `Frontend/` and `ExternalServices/` placeholders were removed and the TRD §4 layout scaffolded (see [PROJECT_STRUCTURE.md](../PROJECT_STRUCTURE.md)); P1-02 still owes the contribution guide.
+
+## 8. Owners for Items Outside the Plan's Work Packages
+
+The plan assigns Compose and CI (`P1-07`) but not these pieces. Owners follow the code each piece builds or checks. Proposed; confirm at the next gate review.
+
+| Item | Owner | Reviewer | When |
+| :--- | :--- | :--- | :--- |
+| `apps/api/Dockerfile` | Bao | Huy | Phase 1 |
+| `workers/pipeline/Dockerfile` | Phat | Bao | Phase 1 |
+| Web image or static-hosting build for the demo | Huy | Bao | Phase 5, with `P5-08` |
+| CI migration-from-empty job (the job itself is in `P1-07`) | Bao supplies the first migration (`P1-04`); Huy wires the job | Phat | Phase 1 |
+| `openapi.yaml` and the CI OpenAPI validation job | Bao | Huy | Draft in Phase 1, frozen by Phase 4 |
+| CI secret and dependency scans | Huy adds the jobs; Bao triages findings (`P5-05`) | Bao | Phase 5 |
+| Automated deployment (CD) | Not planned; manual deploy per `P5-08` is enough | – | – |
+
+Everything else about Docker and CI stays as in `P1-07` and `P5-08`.
